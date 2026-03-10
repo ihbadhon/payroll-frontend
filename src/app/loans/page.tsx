@@ -790,7 +790,7 @@ function MetricCard({
   }[accent];
 
   return (
-    <div className="rounded-[10px] border border-stroke bg-white p-6  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+    <div className="rounded-[10px] border border-stroke bg-white p-6  dark:border-dark-3 dark:bg-dark-2 dark:shadow-card">
       <div className="flex items-start justify-between">
         <div
           className={`flex h-12 w-12 items-center justify-center rounded-xl ${a.bg} ring-1 ${a.ring}`}
@@ -1119,7 +1119,7 @@ export default function LoansPage() {
         </div>
 
         {/* ── Pending Requests ──────────────────────────────────────── */}
-        <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+        <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-dark-2 dark:shadow-card">
           <div className="flex items-center justify-between border-b border-stroke px-6 py-4 dark:border-dark-3">
             <div className="flex items-center gap-2.5">
               <Clock className="h-4.5 w-4.5 text-dark-4 dark:text-dark-6" />
@@ -1238,7 +1238,7 @@ export default function LoansPage() {
         </div>
 
         {/* ── Loan Records ──────────────────────────────────────────── */}
-        <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+        <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-dark-2 dark:shadow-card">
           <div className="flex items-center gap-2.5 border-b border-stroke px-6 py-4 dark:border-dark-3">
             <CreditCard className="h-4.5 w-4.5 text-dark-4 dark:text-dark-6" />
             <div>

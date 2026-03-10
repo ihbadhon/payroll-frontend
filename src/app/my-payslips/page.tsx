@@ -618,7 +618,7 @@ function BreakdownRow({
       <td colSpan={colSpan} className="px-6 pb-5 pt-0">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           {earnings.length > 0 && (
-            <div className="rounded-xl border border-green-100 bg-white p-4 dark:border-green-500/20 dark:bg-gray-dark">
+            <div className="rounded-xl border border-green-100 bg-white p-4 dark:border-green-500/20 dark:bg-dark-2">
               <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-green-700 dark:text-green-400">
                 Earnings Breakdown
               </p>
@@ -647,7 +647,7 @@ function BreakdownRow({
             </div>
           )}
           {deductions.length > 0 && (
-            <div className="rounded-xl border border-red-100 bg-white p-4 dark:border-red-500/20 dark:bg-gray-dark">
+            <div className="rounded-xl border border-red-100 bg-white p-4 dark:border-red-500/20 dark:bg-dark-2">
               <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-red-700 dark:text-red-400">
                 Deductions Breakdown
               </p>
@@ -720,7 +720,7 @@ function MetricCard({
   }[accent];
 
   return (
-    <div className="rounded-[10px] border border-stroke bg-white p-6  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+    <div className="rounded-[10px] border border-stroke bg-white p-6  dark:border-dark-3 dark:bg-dark-2 dark:shadow-card">
       <div className="flex items-start justify-between">
         <div
           className={`flex h-12 w-12 items-center justify-center rounded-xl ${a.bg} ring-1 ${a.ring}`}
@@ -881,7 +881,7 @@ export default function MyPayslipsPage() {
 
       {/* ── Latest Payslip Detail Card ────────────────────────────────── */}
       {latest && !isLoading && (
-        <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+        <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-dark-2 dark:shadow-card">
           {/* Card Header */}
           <div className="flex items-center gap-2.5 border-b border-stroke px-6 py-4 dark:border-dark-3">
             <Receipt className="h-4.5 w-4.5 text-dark-4 dark:text-dark-6" />
@@ -1055,7 +1055,7 @@ export default function MyPayslipsPage() {
       )}
 
       {/* ── All Payslips Table ────────────────────────────────────────── */}
-      <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+      <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-dark-2 dark:shadow-card">
         <div className="flex items-center justify-between border-b border-stroke px-6 py-4 dark:border-dark-3">
           <div className="flex items-center gap-2.5">
             <Receipt className="h-4.5 w-4.5 text-dark-4 dark:text-dark-6" />

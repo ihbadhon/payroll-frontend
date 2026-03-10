@@ -38,25 +38,26 @@ export default function ForgotPasswordForm() {
     }
   };
 
-  // ── Success state ──────────────────────────────────────────────────────────
   if (submitted) {
     return (
-      <div className="w-full max-w-md">
-        <div className="rounded-2xl border border-gray-200 bg-white p-10 text-center  dark:border-gray-700 dark:bg-gray-900">
-          <CheckCircle className="mx-auto mb-4 h-16 w-16 text-green-500" />
-          <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+      <div className="w-full max-w-[420px]">
+        <div className="rounded-2xl border border-stroke bg-white px-8 py-10 text-center shadow-sm dark:border-dark-3 dark:bg-dark-2">
+          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-green-50 dark:bg-green-500/10">
+            <CheckCircle className="h-7 w-7 text-green-600 dark:text-green-400" />
+          </div>
+          <h2 className="text-lg font-bold text-dark dark:text-white">
             Check your email
           </h2>
-          <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+          <p className="mt-2 text-sm text-dark-5 dark:text-dark-6">
             If{" "}
-            <span className="font-medium text-gray-700 dark:text-gray-300">
+            <span className="font-medium text-dark dark:text-white">
               {submittedEmail}
             </span>{" "}
-            is registered, you&apos;ll receive a password reset link shortly.
+            is registered, you&apos;ll receive a reset link shortly.
           </p>
           <Link
             href="/login"
-            className="mt-6 inline-block text-sm text-indigo-600 hover:underline dark:text-indigo-400"
+            className="mt-6 inline-block text-sm font-medium text-primary transition hover:text-primary/80"
           >
             Back to Login
           </Link>
@@ -65,24 +66,22 @@ export default function ForgotPasswordForm() {
     );
   }
 
-  // ── Form ───────────────────────────────────────────────────────────────────
   return (
-    <div className="w-full max-w-md">
-      <div className="rounded-2xl border border-gray-200 bg-white p-8  dark:border-gray-700 dark:bg-gray-900">
+    <div className="w-full max-w-[420px]">
+      <div className="rounded-2xl border border-stroke bg-white px-8 py-10 shadow-sm dark:border-dark-3 dark:bg-dark-2">
         {/* Header */}
-        <div className="mb-8 text-center">
-          <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-600 shadow-md dark:bg-indigo-500">
-            <Mail className="h-6 w-6 text-white" />
+        <div className="mb-8 flex flex-col items-center text-center">
+          <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-primary shadow-sm">
+            <Mail className="h-5.5 w-5.5 text-white" />
           </div>
-          <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          <h1 className="text-xl font-bold text-dark dark:text-white">
             Forgot Password?
           </h1>
-          <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+          <p className="mt-1.5 text-sm text-dark-5 dark:text-dark-6">
             Enter your email and we&apos;ll send you a reset link.
           </p>
         </div>
 
-        {/* Form */}
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="space-y-5"
@@ -110,7 +109,7 @@ export default function ForgotPasswordForm() {
         <div className="mt-5 text-center">
           <Link
             href="/login"
-            className="text-sm text-indigo-600 hover:underline dark:text-indigo-400"
+            className="text-sm font-medium text-primary transition hover:text-primary/80"
           >
             Back to Login
           </Link>

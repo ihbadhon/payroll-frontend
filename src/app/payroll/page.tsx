@@ -983,7 +983,7 @@ function SummaryTile({
   }[accent];
 
   return (
-    <div className="rounded-[10px] border border-stroke bg-white p-4  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+    <div className="rounded-[10px] border border-stroke bg-white p-4  dark:border-dark-3 dark:bg-dark-2 dark:shadow-card">
       <div
         className={`flex h-10 w-10 items-center justify-center rounded-xl ${a.bg} ring-1 ${a.ring}`}
       >
@@ -1248,7 +1248,7 @@ export default function PayrollPage() {
       )}
 
       {/* ── Period Selector ───────────────────────────────────────────── */}
-      <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+      <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-dark-2 dark:shadow-card">
         <div className="flex items-center gap-2.5 border-b border-stroke px-6 py-4 dark:border-dark-3">
           <Calculator className="h-4.5 w-4.5 text-dark-4 dark:text-dark-6" />
           <h3 className="text-base font-semibold text-dark dark:text-white">
@@ -1323,7 +1323,7 @@ export default function PayrollPage() {
 
       {/* ── Empty/Idle State ──────────────────────────────────────────── */}
       {!previewEnabled && (
-        <div className="flex flex-col items-center justify-center rounded-[10px] border border-dashed border-stroke bg-white py-20 text-center dark:border-dark-3 dark:bg-gray-dark">
+        <div className="flex flex-col items-center justify-center rounded-[10px] border border-dashed border-stroke bg-white py-20 text-center dark:border-dark-3 dark:bg-dark-2">
           <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 ring-1 ring-primary/20">
             <Calculator className="h-8 w-8 text-primary" />
           </div>
@@ -1341,7 +1341,7 @@ export default function PayrollPage() {
       {previewEnabled && (
         <>
           {/* Preview Table */}
-          <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+          <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-dark-2 dark:shadow-card">
             <div className="flex items-center justify-between border-b border-stroke px-6 py-4 dark:border-dark-3">
               <div className="flex items-center gap-2.5">
                 <FileText className="h-4.5 w-4.5 text-dark-4 dark:text-dark-6" />
@@ -1499,7 +1499,7 @@ export default function PayrollPage() {
                 className={`flex flex-col gap-4 rounded-[10px] border p-6 sm:flex-row sm:items-center sm:justify-between ${
                   generated
                     ? "border-green-200 bg-green-50 dark:border-green-500/20 dark:bg-green-500/10"
-                    : "border-dashed border-stroke bg-white dark:border-dark-3 dark:bg-gray-dark"
+                    : "border-dashed border-stroke bg-white dark:border-dark-3 dark:bg-dark-2"
                 }`}
               >
                 <div className="flex items-center gap-4">
@@ -1557,7 +1557,7 @@ export default function PayrollPage() {
 
       {/* ── Payroll Records ───────────────────────────────────────────── */}
       {(isAdmin || isFinance) && (
-        <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+        <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-dark-2 dark:shadow-card">
           {/* Card Header */}
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-stroke px-6 py-4 dark:border-dark-3">
             <div className="flex items-center gap-2.5">

@@ -13,7 +13,7 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { z } from "zod";
 
-// ─── Schema ─────────────────────────────────────────────
+// ─── Schema ──────────────────────────────────────────────────────────────────
 const loginSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
   password: z.string().min(6, "Password must be at least 6 characters"),
@@ -21,7 +21,7 @@ const loginSchema = z.object({
 
 type LoginFormValues = z.infer<typeof loginSchema>;
 
-// ─── Inner Form (uses useSearchParams — must be wrapped in Suspense) ──────────
+// ─── Inner Form ───────────────────────────────────────────────────────────────
 function LoginFormInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -41,15 +41,9 @@ function LoginFormInner() {
   const onSubmit = async (data: LoginPayload) => {
     try {
       const result = await login(data);
-
-      // Store access token
       setAccessToken(result.accessToken);
-
-      // Store user
       setUser(result.user);
-
       toast.success(`Welcome back, ${result.user.name}!`);
-
       router.replace(callbackUrl);
     } catch (error) {
       toast.error(getErrorMessage(error));
@@ -57,39 +51,55 @@ function LoginFormInner() {
   };
 
   return (
-    <div className="w-full max-w-md">
-      <div
-        className="rounded-2xl border border-gray-200 bg-white p-8 
-                   transition-all duration-300 hover:
-                   dark:border-gray-700 dark:bg-gray-900"
-      >
-        {/* Logo */}
-        <div className="mb-8 text-center">
-          <div
-            className="mx-auto mb-4 flex h-12 w-12 items-center justify-center
-                       rounded-xl bg-indigo-600 shadow-md
-                       dark:bg-indigo-500"
-          >
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              className="h-7 w-7 text-white"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+    <div className="w-full max-w-[420px]">
+      {/* Card */}
+      <div className="rounded-2xl border border-stroke bg-white px-8 py-10 shadow-sm dark:border-dark-3 dark:bg-dark-2">
+        {/* Branding */}
+        <div className="mb-8 flex flex-col items-center text-center">
+          <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-primary shadow-sm">
+            <svg viewBox="0 0 20 20" fill="none" className="h-7 w-7">
+              <rect
+                x="3"
+                y="3"
+                width="6"
+                height="6"
+                rx="1.5"
+                fill="white"
+                fillOpacity="0.9"
+              />
+              <rect
+                x="11"
+                y="3"
+                width="6"
+                height="6"
+                rx="1.5"
+                fill="white"
+                fillOpacity="0.5"
+              />
+              <rect
+                x="3"
+                y="11"
+                width="6"
+                height="6"
+                rx="1.5"
+                fill="white"
+                fillOpacity="0.5"
+              />
+              <rect
+                x="11"
+                y="11"
+                width="6"
+                height="6"
+                rx="1.5"
+                fill="white"
+                fillOpacity="0.9"
               />
             </svg>
           </div>
-
-          <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-100">
-            Welcome to PayrollHQ
+          <h1 className="text-xl font-bold text-dark dark:text-white">
+            PayrollHQ
           </h1>
-
-          <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+          <p className="mt-1.5 text-sm text-dark-5 dark:text-dark-6">
             Sign in to your account to continue
           </p>
         </div>
@@ -129,35 +139,32 @@ function LoginFormInner() {
         </form>
 
         {/* Forgot password */}
-        <div className="mt-4 text-center">
+        <div className="mt-5 text-center">
           <a
             href="/forgot-password"
-            className="text-sm text-indigo-600 hover:underline dark:text-indigo-400"
+            className="text-sm font-medium text-primary transition hover:text-primary/80"
           >
-            Forgot password?
+            Forgot your password?
           </a>
         </div>
 
-        {/* Footer */}
-        <p className="mt-4 text-center text-xs text-gray-500 dark:text-gray-400">
-          Don&apos;t have an account? Contact your administrator.
+        {/* Footer note */}
+        <p className="mt-6 border-t border-stroke pt-5 text-center text-xs text-dark-5 dark:border-dark-3 dark:text-dark-6">
+          Don&apos;t have an account?{" "}
+          <span className="font-medium text-dark dark:text-white">
+            Contact your administrator.
+          </span>
         </p>
       </div>
     </div>
   );
 }
 
-// ─── Page Wrapper (Centered Layout) ─────────────────────
+// ─── Export ───────────────────────────────────────────────────────────────────
 export default function LoginForm() {
   return (
     <Suspense>
-      <div
-        className="flex min-h-screen items-center justify-center
-                   bg-gray-50 px-4
-                   dark:bg-gray-950"
-      >
-        <LoginFormInner />
-      </div>
+      <LoginFormInner />
     </Suspense>
   );
 }

@@ -9,7 +9,7 @@ interface StatCardProps {
   iconColor?: string;
   iconBg?: string;
   trend?: {
-    value: number; // positive = up, negative = down
+    value: number;
     label: string;
   };
   isLoading?: boolean;
@@ -28,33 +28,37 @@ export default function StatCard({
   className,
 }: StatCardProps) {
   return (
-    <div className={cn("card p-5", className)}>
+    <div
+      className={cn(
+        "rounded-[10px] border border-stroke bg-white p-5 dark:border-dark-3 dark:bg-dark-2",
+        className,
+      )}
+    >
       <div className="flex items-start justify-between gap-4">
-        {/* Left: text */}
+        {/* Text */}
         <div className="min-w-0 flex-1">
-          <p className="truncate text-sm font-medium text-gray-500 dark:text-gray-400">
+          <p className="truncate text-sm font-medium text-dark-5 dark:text-dark-6">
             {title}
           </p>
 
           {isLoading ? (
             <div className="mt-2 space-y-2">
-              <div className="h-7 w-28 animate-pulse rounded-md bg-gray-200 dark:bg-dark-3" />
-              <div className="h-4 w-20 animate-pulse rounded-md bg-gray-100 dark:bg-dark-4" />
+              <div className="h-7 w-28 animate-pulse rounded-lg bg-gray-100 dark:bg-dark-3" />
+              <div className="h-3.5 w-20 animate-pulse rounded-full bg-gray-100 dark:bg-dark-3" />
             </div>
           ) : (
             <>
-              <p className="mt-1.5 text-2xl font-bold text-gray-900 dark:text-white">
+              <p className="mt-1.5 text-2xl font-bold tracking-tight text-dark dark:text-white">
                 {value}
               </p>
               {subtitle && (
-                <p className="mt-0.5 truncate text-xs text-gray-500 dark:text-gray-400">
+                <p className="mt-0.5 truncate text-xs text-dark-5 dark:text-dark-6">
                   {subtitle}
                 </p>
               )}
             </>
           )}
 
-          {/* Trend badge */}
           {trend && !isLoading && (
             <div
               className={cn(
@@ -74,14 +78,15 @@ export default function StatCard({
           )}
         </div>
 
-        {/* Right: icon */}
+        {/* Icon */}
         <div
           className={cn(
-            "flex h-12 w-12 shrink-0 items-center justify-center rounded-xl",
+            "flex h-12 w-12 shrink-0 items-center justify-center rounded-xl ring-1",
             iconBg,
+            iconColor.includes("primary") ? "ring-primary/20" : "ring-black/5",
           )}
         >
-          <Icon className={cn("h-6 w-6", iconColor)} />
+          <Icon className={cn("h-5.5 w-5.5", iconColor)} />
         </div>
       </div>
     </div>

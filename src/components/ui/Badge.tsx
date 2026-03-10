@@ -15,7 +15,7 @@ interface BadgeProps {
 }
 
 const variantStyles: Record<BadgeVariant, string> = {
-  default: "bg-gray-100 text-gray-700 dark:bg-dark-3 dark:text-gray-300",
+  default: "bg-dark-8 text-dark-4 dark:bg-dark-3 dark:text-dark-6",
   success:
     "bg-green-50 text-green-700 dark:bg-green-500/10 dark:text-green-400",
   warning:

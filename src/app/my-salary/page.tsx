@@ -643,7 +643,7 @@ function MetricCard({
   }[accent];
 
   return (
-    <div className="rounded-[10px] border border-stroke bg-white p-6  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+    <div className="rounded-[10px] border border-stroke bg-white p-6  dark:border-dark-3 dark:bg-dark-2 dark:shadow-card">
       <div className="flex items-start justify-between">
         <div
           className={`flex h-12 w-12 items-center justify-center rounded-xl ${a.bg} ring-1 ${a.ring}`}
@@ -781,7 +781,7 @@ export default function MySalaryPage() {
       {(salary || salaryLoading) && (
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
           {/* Summary Card */}
-          <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+          <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-dark-2 dark:shadow-card">
             <div className="flex items-center gap-2.5 border-b border-stroke px-6 py-4 dark:border-dark-3">
               <BarChart3 className="h-4.5 w-4.5 text-dark-4 dark:text-dark-6" />
               <h3 className="text-base font-semibold text-dark dark:text-white">
@@ -877,7 +877,7 @@ export default function MySalaryPage() {
           </div>
 
           {/* Components Table */}
-          <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card lg:col-span-2">
+          <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-dark-2 dark:shadow-card lg:col-span-2">
             <div className="flex items-center justify-between border-b border-stroke px-6 py-4 dark:border-dark-3">
               <div className="flex items-center gap-2.5">
                 <Layers className="h-4.5 w-4.5 text-dark-4 dark:text-dark-6" />
@@ -953,7 +953,7 @@ export default function MySalaryPage() {
 
       {/* ── Active Loan ──────────────────────────────────────────────── */}
       {salary?.activeLoan && (
-        <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+        <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-dark-2 dark:shadow-card">
           <div className="flex items-center gap-2.5 border-b border-stroke px-6 py-4 dark:border-dark-3">
             <HandCoins className="h-4.5 w-4.5 text-orange-500" />
             <h3 className="text-base font-semibold text-dark dark:text-white">
@@ -1057,7 +1057,7 @@ export default function MySalaryPage() {
 
       {/* ── This Month's Bonuses ─────────────────────────────────────── */}
       {salary?.currentMonthBonuses && salary.currentMonthBonuses.length > 0 && (
-        <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+        <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-dark-2 dark:shadow-card">
           <div className="flex items-center gap-2.5 border-b border-stroke px-6 py-4 dark:border-dark-3">
             <BadgeDollarSign className="h-4.5 w-4.5 text-purple-500" />
             <h3 className="text-base font-semibold text-dark dark:text-white">
@@ -1105,7 +1105,7 @@ export default function MySalaryPage() {
       )}
 
       {/* ── Payslip History ──────────────────────────────────────────── */}
-      <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+      <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-dark-2 dark:shadow-card">
         <div className="flex items-center justify-between border-b border-stroke px-6 py-4 dark:border-dark-3">
           <div className="flex items-center gap-2.5">
             <Receipt className="h-4.5 w-4.5 text-dark-4 dark:text-dark-6" />

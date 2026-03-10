@@ -527,7 +527,7 @@ function MetricCard({
   }[accent];
 
   return (
-    <div className="rounded-[10px] border border-stroke bg-white p-6  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+    <div className="rounded-[10px] border border-stroke bg-white p-6  dark:border-dark-3 dark:bg-dark-2 dark:shadow-card">
       <div className="flex items-start justify-between">
         <div
           className={`flex h-12 w-12 items-center justify-center rounded-xl ${a.bg} ring-1 ${a.ring}`}
@@ -663,10 +663,10 @@ function LoanRow({ loan, index }: { loan: Loan; index: number }) {
                   key={inst.id}
                   className={`rounded-xl border p-3 text-xs transition ${
                     inst.status === InstallmentStatus.PAID
-                      ? "border-green-200 bg-white dark:border-green-500/20 dark:bg-gray-dark"
+                      ? "border-green-200 bg-white dark:border-green-500/20 dark:bg-dark-2"
                       : inst.status === InstallmentStatus.OVERDUE
-                        ? "border-red-200 bg-white dark:border-red-500/20 dark:bg-gray-dark"
-                        : "border-stroke bg-white dark:border-dark-3 dark:bg-gray-dark"
+                        ? "border-red-200 bg-white dark:border-red-500/20 dark:bg-dark-2"
+                        : "border-stroke bg-white dark:border-dark-3 dark:bg-dark-2"
                   }`}
                 >
                   <div className="mb-1.5 flex items-center justify-between">
@@ -779,7 +779,7 @@ export default function MyLoansPage() {
 
       {/* ── Active Loan Progress Card ─────────────────────────────────── */}
       {activeLoan && (
-        <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+        <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-dark-2 dark:shadow-card">
           <div className="flex items-center gap-2.5 border-b border-stroke px-6 py-4 dark:border-dark-3">
             <TrendingUp className="h-4.5 w-4.5 text-dark-4 dark:text-dark-6" />
             <h3 className="text-base font-semibold text-dark dark:text-white">
@@ -838,31 +838,38 @@ export default function MyLoansPage() {
             </div>
 
             {/* Next installment hint if available */}
-            {activeLoan.nextInstallment && (
-              <div className="mt-5 flex items-center gap-3 rounded-xl border border-primary/20 bg-primary/5 px-5 py-3.5 dark:bg-primary/10">
-                <CalendarDays className="h-4.5 w-4.5 shrink-0 text-primary" />
-                <p className="text-sm text-primary">
-                  Next installment{" "}
-                  <span className="font-bold">
-                    #{activeLoan.nextInstallment.installmentNo}
-                  </span>{" "}
-                  of{" "}
-                  <span className="font-bold">
-                    {formatCurrency(activeLoan.nextInstallment.amount)}
-                  </span>{" "}
-                  due on{" "}
-                  <span className="font-bold">
-                    {formatDate(activeLoan.nextInstallment.dueDate)}
-                  </span>
-                </p>
-              </div>
-            )}
+            {(() => {
+              const nextInstallment = activeLoan.installments?.find(
+                (i) =>
+                  i.status === InstallmentStatus.PENDING ||
+                  i.status === InstallmentStatus.OVERDUE,
+              );
+              return nextInstallment ? (
+                <div className="mt-5 flex items-center gap-3 rounded-xl border border-primary/20 bg-primary/5 px-5 py-3.5 dark:bg-primary/10">
+                  <CalendarDays className="h-4.5 w-4.5 shrink-0 text-primary" />
+                  <p className="text-sm text-primary">
+                    Next installment{" "}
+                    <span className="font-bold">
+                      #{nextInstallment.installmentNo}
+                    </span>{" "}
+                    of{" "}
+                    <span className="font-bold">
+                      {formatCurrency(nextInstallment.amount)}
+                    </span>{" "}
+                    due on{" "}
+                    <span className="font-bold">
+                      {formatDate(nextInstallment.dueDate)}
+                    </span>
+                  </p>
+                </div>
+              ) : null;
+            })()}
           </div>
         </div>
       )}
 
       {/* ── Loan History Table ────────────────────────────────────────── */}
-      <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+      <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-dark-2 dark:shadow-card">
         <div className="flex items-center justify-between border-b border-stroke px-6 py-4 dark:border-dark-3">
           <div className="flex items-center gap-2.5">
             <CreditCard className="h-4.5 w-4.5 text-dark-4 dark:text-dark-6" />

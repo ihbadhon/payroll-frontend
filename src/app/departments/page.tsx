@@ -435,7 +435,7 @@ function CreateDepartmentModal({
 // ─── Department Card ──────────────────────────────────────────────────────────
 function DepartmentCard({ dept }: { dept: Department }) {
   return (
-    <div className="group rounded-[10px] border border-stroke bg-white p-5  transition hover:shadow-md dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+    <div className="group rounded-[10px] border border-stroke bg-white p-5  transition hover:shadow-md dark:border-dark-3 dark:bg-dark-2 dark:shadow-card">
       <div className="flex items-start gap-4">
         <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 ring-1 ring-primary/20">
           <Building2 className="h-5 w-5 text-primary" />
@@ -507,7 +507,7 @@ function MetricCard({
   }[accent];
 
   return (
-    <div className="rounded-[10px] border border-stroke bg-white p-6  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+    <div className="rounded-[10px] border border-stroke bg-white p-6  dark:border-dark-3 dark:bg-dark-2 dark:shadow-card">
       <div className="flex items-start justify-between">
         <div
           className={`flex h-12 w-12 items-center justify-center rounded-xl ${a.bg} ring-1 ${a.ring}`}
@@ -574,7 +574,7 @@ export default function DepartmentsPage() {
             Array.from({ length: 3 }).map((_, i) => (
               <div
                 key={i}
-                className="rounded-[10px] border border-stroke bg-white p-6  dark:border-dark-3 dark:bg-gray-dark"
+                className="rounded-[10px] border border-stroke bg-white p-6  dark:border-dark-3 dark:bg-dark-2"
               >
                 <div className="h-12 w-12 animate-pulse rounded-xl bg-gray-100 dark:bg-dark-3" />
                 <div className="mt-4 space-y-2">
@@ -611,7 +611,7 @@ export default function DepartmentsPage() {
         </div>
 
         {/* ── Department List ─────────────────────────────────────────── */}
-        <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+        <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-dark-2 dark:shadow-card">
           {/* Card Header */}
           <div className="flex flex-col gap-3 border-b border-stroke px-6 py-4 dark:border-dark-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-center gap-2.5">

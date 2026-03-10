@@ -405,7 +405,7 @@ function MetricCard({
   }[accent];
 
   return (
-    <div className="rounded-[10px] border border-stroke bg-white p-6  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+    <div className="rounded-[10px] border border-stroke bg-white p-6  dark:border-dark-3 dark:bg-dark-2 dark:shadow-card">
       <div className="flex items-start justify-between">
         <div
           className={`flex h-12 w-12 items-center justify-center rounded-xl ${a.bg} ring-1 ${a.ring}`}
@@ -547,7 +547,7 @@ export default function BonusPage() {
         {/* ── Main Layout ────────────────────────────────────────────── */}
         <div className="grid grid-cols-1 gap-5 xl:grid-cols-4">
           {/* Department Sidebar */}
-          <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card xl:col-span-1">
+          <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-dark-2 dark:shadow-card xl:col-span-1">
             <div className="flex items-center gap-2.5 border-b border-stroke px-5 py-4 dark:border-dark-3">
               <Building2 className="h-4.5 w-4.5 text-dark-4 dark:text-dark-6" />
               <div>
@@ -618,7 +618,7 @@ export default function BonusPage() {
           <div className="space-y-5 xl:col-span-3">
             {/* Empty state — no department selected */}
             {!selectedDeptId && (
-              <div className="flex flex-col items-center justify-center gap-3 rounded-[10px] border border-dashed border-stroke bg-white py-20 text-center dark:border-dark-3 dark:bg-gray-dark">
+              <div className="flex flex-col items-center justify-center gap-3 rounded-[10px] border border-dashed border-stroke bg-white py-20 text-center dark:border-dark-3 dark:bg-dark-2">
                 <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gray-100 dark:bg-dark-3">
                   <Building2 className="h-7 w-7 text-gray-400" />
                 </div>
@@ -632,7 +632,7 @@ export default function BonusPage() {
               <>
                 {/* Employee Chip Grid */}
                 {allEmployees.length > 0 && (
-                  <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+                  <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-dark-2 dark:shadow-card">
                     <div className="flex items-center justify-between border-b border-stroke px-5 py-4 dark:border-dark-3">
                       <div className="flex items-center gap-2.5">
                         <Users className="h-4.5 w-4.5 text-dark-4 dark:text-dark-6" />
@@ -681,7 +681,7 @@ export default function BonusPage() {
                 )}
 
                 {/* Bonus Table Card */}
-                <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+                <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-dark-2 dark:shadow-card">
                   <div className="flex flex-wrap items-center justify-between gap-3 border-b border-stroke px-5 py-4 dark:border-dark-3">
                     <div className="flex items-center gap-2.5">
                       <Gift className="h-4.5 w-4.5 text-dark-4 dark:text-dark-6" />

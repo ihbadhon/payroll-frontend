@@ -774,7 +774,7 @@ function MetricCard({
   const a = accentMap[accent];
 
   return (
-    <div className="rounded-[10px] border border-stroke bg-white p-6  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+    <div className="rounded-[10px] border border-stroke bg-white p-6  dark:border-dark-3 dark:bg-dark-2 dark:shadow-card">
       <div className="flex items-start justify-between">
         <div
           className={`flex h-12 w-12 items-center justify-center rounded-xl ${a.bg} ring-1 ${a.ring}`}
@@ -981,7 +981,7 @@ export default function EmployeeDashboard() {
       {/* ── Salary Breakdown + Recent Payslips ───────────────────────── */}
       <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
         {/* Salary Breakdown Panel */}
-        <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+        <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-dark-2 dark:shadow-card">
           <div className="flex items-center justify-between border-b border-stroke px-6 py-4 dark:border-dark-3">
             <div className="flex items-center gap-2.5">
               <Activity className="h-4.5 w-4.5 text-dark-4 dark:text-dark-6" />
@@ -1079,7 +1079,7 @@ export default function EmployeeDashboard() {
         </div>
 
         {/* Recent Payslips */}
-        <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card lg:col-span-2">
+        <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-dark-2 dark:shadow-card lg:col-span-2">
           <CardHeader
             title="Recent Payslips"
             href="/my-payslips"
@@ -1158,7 +1158,7 @@ export default function EmployeeDashboard() {
       {/* ── Loans + Bonuses ──────────────────────────────────────────── */}
       <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
         {/* Loans Table */}
-        <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+        <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-dark-2 dark:shadow-card">
           <CardHeader title="My Loans" href="/my-loans" icon={CreditCard} />
           <div className="overflow-x-auto">
             <table className="w-full">
@@ -1235,7 +1235,7 @@ export default function EmployeeDashboard() {
         </div>
 
         {/* Bonuses Table */}
-        <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+        <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-dark-2 dark:shadow-card">
           <CardHeader
             title="Recent Bonuses"
             href="/my-bonuses"
@@ -1354,7 +1354,7 @@ export default function EmployeeDashboard() {
               <Link
                 key={href}
                 href={href}
-                className={`group flex items-center gap-3.5 rounded-[10px] border border-stroke bg-white p-4  transition hover:shadow-md hover:ring-2 dark:border-dark-3 dark:bg-gray-dark dark:shadow-card ${ring}`}
+                className={`group flex items-center gap-3.5 rounded-[10px] border border-stroke bg-white p-4  transition hover:shadow-md hover:ring-2 dark:border-dark-3 dark:bg-dark-2 dark:shadow-card ${ring}`}
               >
                 <div
                   className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${bg}`}
@@ -1376,7 +1376,7 @@ export default function EmployeeDashboard() {
         {/* Tip / Info Panel */}
         <div className="flex flex-col gap-4">
           {/* Account Status Card */}
-          <div className="rounded-[10px] border border-stroke bg-white p-5  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+          <div className="rounded-[10px] border border-stroke bg-white p-5  dark:border-dark-3 dark:bg-dark-2 dark:shadow-card">
             <h3 className="mb-4 text-sm font-semibold text-dark dark:text-white">
               Account Status
             </h3>
