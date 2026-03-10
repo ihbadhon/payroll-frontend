@@ -33,7 +33,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
       <aside
         className={cn(
           // Base
-          "fixed inset-y-0 left-0 z-30 flex w-64 flex-col",
+          "fixed inset-y-0 left-0 z-30 flex w-64 shrink-0 flex-col",
           "border-r border-gray-200 bg-white",
           "dark:border-dark-3 dark:bg-dark-2",
           // Desktop: always visible
