@@ -401,7 +401,7 @@ export default function AuditLogPage() {
           onClick={() => setSelectedLogId(null)}
         >
           <div
-            className="fixed right-0 top-0 h-full w-full max-w-lg overflow-y-auto bg-white shadow-2xl dark:bg-dark-2"
+            className="fixed right-0 top-0 h-full w-full max-w-lg overflow-y-auto bg-white  dark:bg-dark-2"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Drawer Header */}

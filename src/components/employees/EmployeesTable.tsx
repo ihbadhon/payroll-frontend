@@ -442,7 +442,7 @@ export default function EmployeesTable({
                     onClick={() => onPageChange(p)}
                     className={`flex h-8 w-8 items-center justify-center rounded-lg text-xs font-semibold transition ${
                       p === page
-                        ? "bg-primary text-white shadow-sm"
+                        ? "bg-primary text-white "
                         : "text-dark-4 hover:bg-gray-100 dark:text-dark-6 dark:hover:bg-dark-3"
                     }`}
                   >

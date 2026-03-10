@@ -232,7 +232,7 @@ function MetricCard({
   isLoading?: boolean;
 }) {
   return (
-    <div className="rounded-[10px] border border-stroke bg-white p-6 shadow-sm dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+    <div className="rounded-[10px] border border-stroke bg-white p-6  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
       <div className="flex items-start justify-between">
         <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 ring-1 ring-primary/20">
           <Icon className="h-6 w-6 text-primary" />
@@ -370,7 +370,7 @@ export default function EmployeesPage() {
         </div>
 
         {/* ── Filters Bar ────────────────────────────────────────────── */}
-        <div className="rounded-[10px] border border-stroke bg-white p-4 shadow-sm dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+        <div className="rounded-[10px] border border-stroke bg-white p-4  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
             {/* Search */}
             <div className="relative flex-1">
@@ -478,7 +478,7 @@ export default function EmployeesPage() {
         </div>
 
         {/* ── Employee Table ─────────────────────────────────────────── */}
-        <div className="rounded-[10px] border border-stroke bg-white shadow-sm dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+        <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
           {/* Card Header */}
           <div className="flex items-center justify-between border-b border-stroke px-6 py-4 dark:border-dark-3">
             <div className="flex items-center gap-2.5">

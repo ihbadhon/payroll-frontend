@@ -456,7 +456,7 @@ function MetricCard({
   }[accent];
 
   return (
-    <div className="rounded-[10px] border border-stroke bg-white p-6 shadow-sm dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+    <div className="rounded-[10px] border border-stroke bg-white p-6  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
       <div className="flex items-start justify-between">
         <div
           className={`flex h-12 w-12 items-center justify-center rounded-xl ${a.bg} ring-1 ${a.ring}`}
@@ -627,7 +627,7 @@ export default function MyBonusesPage() {
             return (
               <div
                 key={type}
-                className="rounded-[10px] border border-stroke bg-white p-5 shadow-sm dark:border-dark-3 dark:bg-gray-dark dark:shadow-card"
+                className="rounded-[10px] border border-stroke bg-white p-5  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card"
               >
                 <div
                   className={`mb-3 flex h-10 w-10 items-center justify-center rounded-xl ${bg} ring-1 ${ring}`}
@@ -648,7 +648,7 @@ export default function MyBonusesPage() {
       )}
 
       {/* ── Bonus History Table ──────────────────────────────────────── */}
-      <div className="rounded-[10px] border border-stroke bg-white shadow-sm dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+      <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
         <div className="flex items-center justify-between border-b border-stroke px-6 py-4 dark:border-dark-3">
           <div className="flex items-center gap-2.5">
             <BadgeDollarSign className="h-4.5 w-4.5 text-dark-4 dark:text-dark-6" />

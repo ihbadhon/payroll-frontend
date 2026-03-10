@@ -114,7 +114,7 @@ export default function LoanRequestModal({
       />
 
       {/* Modal */}
-      <div className="relative z-10 w-full max-w-md overflow-hidden rounded-2xl bg-white shadow-2xl dark:bg-dark-2">
+      <div className="relative z-10 w-full max-w-md overflow-hidden rounded-2xl bg-white  dark:bg-dark-2">
         {/* Header */}
         <div className="border-b border-gray-100 px-6 py-4 dark:border-dark-3">
           <div className="flex items-center justify-between">

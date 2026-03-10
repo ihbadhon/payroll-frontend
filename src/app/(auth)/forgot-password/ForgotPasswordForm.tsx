@@ -42,7 +42,7 @@ export default function ForgotPasswordForm() {
   if (submitted) {
     return (
       <div className="w-full max-w-md">
-        <div className="rounded-2xl border border-gray-200 bg-white p-10 text-center shadow-xl dark:border-gray-700 dark:bg-gray-900">
+        <div className="rounded-2xl border border-gray-200 bg-white p-10 text-center  dark:border-gray-700 dark:bg-gray-900">
           <CheckCircle className="mx-auto mb-4 h-16 w-16 text-green-500" />
           <h2 className="text-xl font-bold text-gray-900 dark:text-white">
             Check your email
@@ -68,7 +68,7 @@ export default function ForgotPasswordForm() {
   // ── Form ───────────────────────────────────────────────────────────────────
   return (
     <div className="w-full max-w-md">
-      <div className="rounded-2xl border border-gray-200 bg-white p-8 shadow-xl dark:border-gray-700 dark:bg-gray-900">
+      <div className="rounded-2xl border border-gray-200 bg-white p-8  dark:border-gray-700 dark:bg-gray-900">
         {/* Header */}
         <div className="mb-8 text-center">
           <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-600 shadow-md dark:bg-indigo-500">

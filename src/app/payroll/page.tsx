@@ -168,7 +168,7 @@
 //   return (
 //     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
 //       <div className="absolute inset-0 bg-black/50" onClick={onClose} />
-//       <div className="relative z-10 w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl dark:bg-dark-2">
+//       <div className="relative z-10 w-full max-w-md rounded-2xl bg-white p-6  dark:bg-dark-2">
 //         <div className="flex items-start justify-between">
 //           <div className="flex items-center gap-3">
 //             <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-purple-100 dark:bg-purple-500/10">
@@ -678,7 +678,7 @@
 //                   onClick={() => setFilterStatus(tab.value)}
 //                   className={`text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 rounded-md px-3 py-1 text-xs font-medium transition-colors ${
 //                     filterStatus === tab.value
-//                       ? "bg-primary text-gray-200 shadow-sm"
+//                       ? "bg-primary text-gray-200 "
 //                       : ""
 //                   }`}
 //                 >
@@ -983,7 +983,7 @@ function SummaryTile({
   }[accent];
 
   return (
-    <div className="rounded-[10px] border border-stroke bg-white p-4 shadow-sm dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+    <div className="rounded-[10px] border border-stroke bg-white p-4  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
       <div
         className={`flex h-10 w-10 items-center justify-center rounded-xl ${a.bg} ring-1 ${a.ring}`}
       >
@@ -1032,7 +1032,7 @@ function PayslipConfirmModal({
         className="absolute inset-0 bg-black/50 backdrop-blur-sm"
         onClick={onClose}
       />
-      <div className="relative z-10 w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl dark:bg-dark-2">
+      <div className="relative z-10 w-full max-w-md rounded-2xl bg-white p-6  dark:bg-dark-2">
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-3">
             <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-purple-100 dark:bg-purple-500/10">
@@ -1248,7 +1248,7 @@ export default function PayrollPage() {
       )}
 
       {/* ── Period Selector ───────────────────────────────────────────── */}
-      <div className="rounded-[10px] border border-stroke bg-white shadow-sm dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+      <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
         <div className="flex items-center gap-2.5 border-b border-stroke px-6 py-4 dark:border-dark-3">
           <Calculator className="h-4.5 w-4.5 text-dark-4 dark:text-dark-6" />
           <h3 className="text-base font-semibold text-dark dark:text-white">
@@ -1341,7 +1341,7 @@ export default function PayrollPage() {
       {previewEnabled && (
         <>
           {/* Preview Table */}
-          <div className="rounded-[10px] border border-stroke bg-white shadow-sm dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+          <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
             <div className="flex items-center justify-between border-b border-stroke px-6 py-4 dark:border-dark-3">
               <div className="flex items-center gap-2.5">
                 <FileText className="h-4.5 w-4.5 text-dark-4 dark:text-dark-6" />
@@ -1557,7 +1557,7 @@ export default function PayrollPage() {
 
       {/* ── Payroll Records ───────────────────────────────────────────── */}
       {(isAdmin || isFinance) && (
-        <div className="rounded-[10px] border border-stroke bg-white shadow-sm dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+        <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
           {/* Card Header */}
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-stroke px-6 py-4 dark:border-dark-3">
             <div className="flex items-center gap-2.5">
@@ -1582,7 +1582,7 @@ export default function PayrollPage() {
                   onClick={() => setFilterStatus(tab.value)}
                   className={`rounded-lg px-3.5 py-1.5 text-xs font-semibold transition ${
                     filterStatus === tab.value
-                      ? "bg-primary text-white shadow-sm"
+                      ? "bg-primary text-white "
                       : "text-dark-4 hover:text-dark dark:text-dark-6 dark:hover:text-white"
                   }`}
                 >

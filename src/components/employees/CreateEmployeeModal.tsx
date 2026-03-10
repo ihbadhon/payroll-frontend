@@ -2,7 +2,11 @@
 
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
-import { useDepartments, useCreateEmployee, useRoles } from "@/hooks/useEmployees";
+import {
+  useDepartments,
+  useCreateEmployee,
+  useRoles,
+} from "@/hooks/useEmployees";
 import { EmployeeType } from "@/types/enums";
 import { getErrorMessage } from "@/utils/error-handler";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -34,7 +38,8 @@ export default function CreateEmployeeModal({
   onClose,
 }: CreateEmployeeModalProps) {
   // Only fetch when the modal is actually open
-  const { data: departments = [], isLoading: deptsLoading } = useDepartments(isOpen);
+  const { data: departments = [], isLoading: deptsLoading } =
+    useDepartments(isOpen);
   const { data: roles = [], isLoading: rolesLoading } = useRoles(isOpen);
   const { mutateAsync: createEmployee, isPending } = useCreateEmployee();
 
@@ -77,7 +82,7 @@ export default function CreateEmployeeModal({
       />
 
       {/* Modal */}
-      <div className="relative z-10 w-full max-w-lg rounded-2xl bg-white shadow-2xl dark:bg-dark-2">
+      <div className="relative z-10 w-full max-w-lg rounded-2xl bg-white  dark:bg-dark-2">
         {/* Header */}
         <div className="flex items-center justify-between border-b border-gray-200 px-6 py-4 dark:border-dark-3">
           <div>
@@ -188,7 +193,9 @@ export default function CreateEmployeeModal({
               ))}
             </select>
             {errors.roleId && (
-              <p className="mt-1 text-xs text-red-500">{errors.roleId.message}</p>
+              <p className="mt-1 text-xs text-red-500">
+                {errors.roleId.message}
+              </p>
             )}
           </div>
 

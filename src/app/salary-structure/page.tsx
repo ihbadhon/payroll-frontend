@@ -79,7 +79,7 @@ function AssignSalaryModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-black/50" onClick={onClose} />
-      <div className="relative w-full max-w-md rounded-2xl bg-white p-6 shadow-xl dark:bg-dark-2">
+      <div className="relative w-full max-w-md rounded-2xl bg-white p-6  dark:bg-dark-2">
         <div className="mb-5 flex items-start justify-between">
           <div>
             <h3 className="text-base font-semibold text-gray-900 dark:text-white">
@@ -192,7 +192,7 @@ function EditSalaryModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-black/50" onClick={onClose} />
-      <div className="relative w-full max-w-md rounded-2xl bg-white p-6 shadow-xl dark:bg-dark-2">
+      <div className="relative w-full max-w-md rounded-2xl bg-white p-6  dark:bg-dark-2">
         <div className="mb-5 flex items-start justify-between">
           <div>
             <h3 className="text-base font-semibold text-gray-900 dark:text-white">
@@ -289,7 +289,7 @@ function RejectModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-black/50" onClick={onClose} />
-      <div className="relative w-full max-w-md rounded-2xl bg-white p-6 shadow-xl dark:bg-dark-2">
+      <div className="relative w-full max-w-md rounded-2xl bg-white p-6  dark:bg-dark-2">
         <div className="mb-5 flex items-start justify-between">
           <div>
             <h3 className="text-base font-semibold text-gray-900 dark:text-white">

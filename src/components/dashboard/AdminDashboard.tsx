@@ -323,7 +323,7 @@ function MetricCard({
   }[accent];
 
   return (
-    <div className="rounded-[10px] border border-stroke bg-white p-6 shadow-sm dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+    <div className="rounded-[10px] border border-stroke bg-white p-6  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
       <div className="flex items-start justify-between">
         <div
           className={`flex h-12 w-12 items-center justify-center rounded-xl ${a.bg} ring-1 ${a.ring}`}
@@ -506,7 +506,7 @@ export default function AdminDashboard() {
       {/* ── Chart + Summary ───────────────────────────────────────────── */}
       <div className="grid grid-cols-1 gap-5 xl:grid-cols-3">
         {/* Payroll Chart */}
-        <div className="rounded-[10px] border border-stroke bg-white shadow-sm dark:border-dark-3 dark:bg-gray-dark dark:shadow-card xl:col-span-2">
+        <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card xl:col-span-2">
           <div className="flex items-center justify-between border-b border-stroke px-6 py-4 dark:border-dark-3">
             <div className="flex items-center gap-2.5">
               <Activity className="h-4.5 w-4.5 text-dark-4 dark:text-dark-6" />
@@ -557,7 +557,7 @@ export default function AdminDashboard() {
         {/* Payroll Summary Panel */}
         <div className="flex flex-col gap-5">
           {/* Summary stats */}
-          <div className="rounded-[10px] border border-stroke bg-white shadow-sm dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+          <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
             <div className="flex items-center gap-2.5 border-b border-stroke px-6 py-4 dark:border-dark-3">
               <BarChart3 className="h-4.5 w-4.5 text-dark-4 dark:text-dark-6" />
               <h3 className="text-base font-semibold text-dark dark:text-white">
@@ -609,7 +609,7 @@ export default function AdminDashboard() {
           </div>
 
           {/* Quick action banner */}
-          <div className="flex flex-1 flex-col justify-center rounded-[10px] bg-gradient-to-br from-primary/90 to-primary p-5 shadow-sm">
+          <div className="flex flex-1 flex-col justify-center rounded-[10px] bg-gradient-to-br from-primary/90 to-primary p-5 ">
             <Sparkles className="mb-3 h-6 w-6 text-white/70" />
             <p className="text-sm font-bold text-white">
               Stay on top of payroll
@@ -637,7 +637,7 @@ export default function AdminDashboard() {
       </div>
 
       {/* ── Recent Payrolls Table ─────────────────────────────────────── */}
-      <div className="rounded-[10px] border border-stroke bg-white shadow-sm dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+      <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
         <div className="flex items-center justify-between border-b border-stroke px-6 py-4 dark:border-dark-3">
           <div className="flex items-center gap-2.5">
             <TrendingUp className="h-4.5 w-4.5 text-dark-4 dark:text-dark-6" />
@@ -706,7 +706,7 @@ export default function AdminDashboard() {
           <Link
             key={href}
             href={href}
-            className="group flex items-center gap-4 rounded-[10px] border border-stroke bg-white p-5 shadow-sm transition hover:shadow-md dark:border-dark-3 dark:bg-gray-dark dark:shadow-card"
+            className="group flex items-center gap-4 rounded-[10px] border border-stroke bg-white p-5  transition hover:shadow-md dark:border-dark-3 dark:bg-gray-dark dark:shadow-card"
           >
             <div
               className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl ring-1 ${accent}`}

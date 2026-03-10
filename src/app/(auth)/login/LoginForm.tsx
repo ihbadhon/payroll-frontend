@@ -59,8 +59,8 @@ function LoginFormInner() {
   return (
     <div className="w-full max-w-md">
       <div
-        className="rounded-2xl border border-gray-200 bg-white p-8 shadow-xl
-                   transition-all duration-300 hover:shadow-2xl
+        className="rounded-2xl border border-gray-200 bg-white p-8 
+                   transition-all duration-300 hover:
                    dark:border-gray-700 dark:bg-gray-900"
       >
         {/* Logo */}

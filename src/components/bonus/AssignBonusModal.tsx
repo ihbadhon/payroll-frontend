@@ -322,7 +322,7 @@ export default function AssignBonusModal({
         onClick={onClose}
       />
 
-      <div className="relative z-10 w-full max-w-lg rounded-2xl bg-white shadow-2xl dark:bg-dark-2">
+      <div className="relative z-10 w-full max-w-lg rounded-2xl bg-white  dark:bg-dark-2">
         {/* Header */}
         <div className="flex items-center justify-between border-b border-gray-200 px-6 py-4 dark:border-dark-3">
           <div className="flex items-center gap-2">

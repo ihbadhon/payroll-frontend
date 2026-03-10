@@ -225,7 +225,7 @@
 //   return (
 //     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
 //       <div className="absolute inset-0 bg-black/50" onClick={onClose} />
-//       <div className="relative z-10 w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl dark:bg-dark-2">
+//       <div className="relative z-10 w-full max-w-md rounded-2xl bg-white p-6  dark:bg-dark-2">
 //         <div className="flex items-center gap-3">
 //           <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-green-100 dark:bg-green-500/10">
 //             <Send className="h-5 w-5 text-green-600" />
@@ -308,7 +308,7 @@
 //   return (
 //     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
 //       <div className="absolute inset-0 bg-black/50" onClick={onClose} />
-//       <div className="relative z-10 w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl dark:bg-dark-2">
+//       <div className="relative z-10 w-full max-w-md rounded-2xl bg-white p-6  dark:bg-dark-2">
 //         <h3 className="text-base font-semibold text-gray-900 dark:text-white">
 //           Reject Loan Request
 //         </h3>
@@ -790,7 +790,7 @@ function MetricCard({
   }[accent];
 
   return (
-    <div className="rounded-[10px] border border-stroke bg-white p-6 shadow-sm dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+    <div className="rounded-[10px] border border-stroke bg-white p-6  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
       <div className="flex items-start justify-between">
         <div
           className={`flex h-12 w-12 items-center justify-center rounded-xl ${a.bg} ring-1 ${a.ring}`}
@@ -840,7 +840,7 @@ function TransferConfirmModal({
         className="absolute inset-0 bg-black/50 backdrop-blur-sm"
         onClick={onClose}
       />
-      <div className="relative z-10 w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl dark:bg-dark-2">
+      <div className="relative z-10 w-full max-w-md rounded-2xl bg-white p-6  dark:bg-dark-2">
         <div className="flex items-center gap-3">
           <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-green-100 dark:bg-green-500/10">
             <Send className="h-5 w-5 text-green-600" />
@@ -942,7 +942,7 @@ function RejectConfirmModal({
         className="absolute inset-0 bg-black/50 backdrop-blur-sm"
         onClick={onClose}
       />
-      <div className="relative z-10 w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl dark:bg-dark-2">
+      <div className="relative z-10 w-full max-w-md rounded-2xl bg-white p-6  dark:bg-dark-2">
         <div className="flex items-center gap-3">
           <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-red-100 dark:bg-red-500/10">
             <XCircle className="h-5 w-5 text-red-600" />
@@ -1119,7 +1119,7 @@ export default function LoansPage() {
         </div>
 
         {/* ── Pending Requests ──────────────────────────────────────── */}
-        <div className="rounded-[10px] border border-stroke bg-white shadow-sm dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+        <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
           <div className="flex items-center justify-between border-b border-stroke px-6 py-4 dark:border-dark-3">
             <div className="flex items-center gap-2.5">
               <Clock className="h-4.5 w-4.5 text-dark-4 dark:text-dark-6" />
@@ -1238,7 +1238,7 @@ export default function LoansPage() {
         </div>
 
         {/* ── Loan Records ──────────────────────────────────────────── */}
-        <div className="rounded-[10px] border border-stroke bg-white shadow-sm dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
+        <div className="rounded-[10px] border border-stroke bg-white  dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
           <div className="flex items-center gap-2.5 border-b border-stroke px-6 py-4 dark:border-dark-3">
             <CreditCard className="h-4.5 w-4.5 text-dark-4 dark:text-dark-6" />
             <div>
