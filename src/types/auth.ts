@@ -33,3 +33,31 @@ export interface SetPasswordPayload {
   token: string;
   password: string;
 }
+
+export interface EmergencyContact {
+  id: string;
+  userId: string;
+  name: string;
+  phone: string;
+  relationship: string;
+  address?: string;
+  email?: string;
+  alternatePhone?: string;
+  notes?: string;
+  createdAt?: string;
+}
+
+export interface EmergencyContactsResponse {
+  total: number;
+  contacts: EmergencyContact[];
+}
+
+export interface EmergencyContactPayload {
+  name: string;
+  phone: string;
+  relationship: string;
+  address?: string;
+  email?: string;
+  alternatePhone?: string;
+  notes?: string;
+}

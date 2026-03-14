@@ -5,7 +5,7 @@ import { ROLES } from "@/config/permissions";
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <AppShell>
-      <RoleGuard allowedRoles={[ROLES.SUPER_ADMIN, ROLES.HR]}>
+      <RoleGuard allowedRoles={[ROLES.SUPER_ADMIN, ROLES.HR, ROLES.FINANCE]}>
         {children}
       </RoleGuard>
     </AppShell>

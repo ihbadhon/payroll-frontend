@@ -1,5 +1,19 @@
 import { EmployeeStatus, EmployeeType } from "./enums";
 
+export type AccountType = "SAVINGS" | "CURRENT" | "SALARY";
+
+export interface BankDetails {
+  id: string;
+  employeeId: string;
+  bankName: string;
+  accountNumber: string;
+  accountHolderName: string;
+  routingNumber?: string;
+  accountType: AccountType;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
 export interface Department {
   id: string;
   name: string;
@@ -21,6 +35,7 @@ export interface Employee {
   resignDate?: string;
   status: EmployeeStatus;
   userId: string;
+  bankDetails?: BankDetails | null;
   createdAt: string;
   updatedAt: string;
 }

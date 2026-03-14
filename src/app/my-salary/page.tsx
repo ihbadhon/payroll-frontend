@@ -698,7 +698,7 @@ export default function MySalaryPage() {
       : 0;
 
   return (
-    <div className="mx-auto max-w-screen-2xl space-y-6 p-4 md:p-6 2xl:p-10">
+    <div className="space-y-6">
       {/* ── Page Header ──────────────────────────────────────────────── */}
       <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
         <div>

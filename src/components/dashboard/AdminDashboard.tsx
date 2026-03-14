@@ -415,7 +415,7 @@ export default function AdminDashboard() {
     .slice(0, 2);
 
   return (
-    <div className="mx-auto max-w-screen-2xl space-y-6 p-4 md:p-6 2xl:p-10">
+    <div className="space-y-6">
       {/* ── Welcome Banner ───────────────────────────────────────────── */}
       <div className="relative overflow-hidden rounded-[10px] bg-gradient-to-br from-primary to-primary/80 px-6 py-7 shadow-md md:px-8">
         <span className="absolute -right-8 -top-8 h-40 w-40 rounded-full bg-white/5" />
@@ -616,7 +616,7 @@ export default function AdminDashboard() {
             </p>
             <p className="mt-1.5 text-xs leading-relaxed text-white/70">
               Approve pending payrolls, review loan requests, and manage your
-              team's compensation from one place.
+              team&apos;s compensation from one place.
             </p>
             <div className="mt-4 flex flex-wrap gap-2">
               <Link

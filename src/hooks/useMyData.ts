@@ -10,9 +10,17 @@ import {
   getProfile,
   updateProfile,
   changePassword,
+  getEmergencyContacts,
+  addEmergencyContact,
+  updateEmergencyContact,
+  getMyBankAccount,
+  addBankAccount,
+  updateBankAccount,
+  BankAccountPayload,
   UpdateProfilePayload,
   ChangePasswordPayload,
 } from "@/services/user/user.service";
+import { EmergencyContactPayload } from "@/types/auth";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const MY_DATA_KEYS = {
@@ -22,6 +30,8 @@ export const MY_DATA_KEYS = {
   payslips: ["my", "payslips"] as const,
   loans: ["my", "loans"] as const,
   userProfile: ["user", "profile"] as const,
+  emergencyContacts: ["user", "emergency-contacts"] as const,
+  bankAccount: ["user", "bank-account"] as const,
 };
 
 export function useMyEmployeeProfile(enabled = true) {
@@ -87,5 +97,78 @@ export function useUpdateProfile() {
 export function useChangePassword() {
   return useMutation({
     mutationFn: (payload: ChangePasswordPayload) => changePassword(payload),
+  });
+}
+
+// ─── Emergency Contacts ──────────────────────────────────────────────────────
+export function useEmergencyContacts() {
+  return useQuery({
+    queryKey: MY_DATA_KEYS.emergencyContacts,
+    queryFn: getEmergencyContacts,
+  });
+}
+
+export function useAddEmergencyContact() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (payload: EmergencyContactPayload) =>
+      addEmergencyContact(payload),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: MY_DATA_KEYS.emergencyContacts,
+      });
+    },
+  });
+}
+
+export function useUpdateEmergencyContact() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({
+      contactId,
+      payload,
+    }: {
+      contactId: string;
+      payload: Partial<EmergencyContactPayload>;
+    }) => updateEmergencyContact(contactId, payload),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: MY_DATA_KEYS.emergencyContacts,
+      });
+    },
+  });
+}
+
+// ─── Bank Account ────────────────────────────────────────────────────────────
+export function useMyBankAccount() {
+  return useQuery({
+    queryKey: MY_DATA_KEYS.bankAccount,
+    queryFn: getMyBankAccount,
+  });
+}
+
+export function useAddBankAccount() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (payload: BankAccountPayload) => addBankAccount(payload),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: MY_DATA_KEYS.bankAccount });
+    },
+  });
+}
+
+export function useUpdateBankAccount() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({
+      accountId,
+      payload,
+    }: {
+      accountId: string;
+      payload: Partial<BankAccountPayload>;
+    }) => updateBankAccount(accountId, payload),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: MY_DATA_KEYS.bankAccount });
+    },
   });
 }

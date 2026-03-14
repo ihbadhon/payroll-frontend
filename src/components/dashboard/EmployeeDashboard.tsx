@@ -876,7 +876,7 @@ export default function EmployeeDashboard() {
     .slice(0, 2);
 
   return (
-    <div className="mx-auto max-w-screen-2xl space-y-6 p-4 md:p-6 2xl:p-10">
+    <div className="space-y-6">
       {/* ── Top Welcome Banner (TailGrids hero-style) ────────────────── */}
       <div className="relative overflow-hidden rounded-[10px] bg-gradient-to-br from-primary to-primary/80 px-6 py-7 shadow-md md:px-8">
         {/* decorative circles */}
