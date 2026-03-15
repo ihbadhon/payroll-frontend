@@ -868,11 +868,11 @@ import {
   useGeneratePayroll,
   usePayrolls,
   useApprovePayroll,
-  useMarkPayrollPaid,
   useRevokePayrollApproval,
   useGeneratePayslips,
+  useExportPayrollCsv,
 } from "@/hooks/usePayroll";
-import { PayrollPreviewItem, TotalMonthlySalary } from "@/types/payroll";
+import { TotalMonthlySalary } from "@/types/payroll";
 import { PayrollStatus } from "@/types/enums";
 import { formatCurrency, getMonthName } from "@/utils/format";
 import { useAuth } from "@/store/auth.context";
@@ -892,12 +892,13 @@ import {
   ClipboardList,
   RotateCcw,
   FileOutput,
+  Download,
   X,
-  ArrowUpRight,
   AlertCircle,
   Sparkles,
 } from "lucide-react";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
@@ -1116,6 +1117,7 @@ function PayslipConfirmModal({
 // ─── Page ─────────────────────────────────────────────────────────────────────
 export default function PayrollPage() {
   const { user } = useAuth();
+  const router = useRouter();
   const isAdmin =
     user?.role?.name === ROLES.SUPER_ADMIN || user?.role?.name === ROLES.HR;
   const isFinance = user?.role?.name === ROLES.FINANCE;
@@ -1138,14 +1140,16 @@ export default function PayrollPage() {
     filterStatus ? { status: filterStatus } : {},
   );
   const { mutate: approvePayroll, isPending: approving } = useApprovePayroll();
-  const { mutate: markPaid, isPending: markingPaid } = useMarkPayrollPaid();
   const { mutate: revokeApproval, isPending: revoking } =
     useRevokePayrollApproval();
   const { mutate: generatePayslips, isPending: generatingPayslips } =
     useGeneratePayslips();
+  const { mutateAsync: exportCsv, isPending: exportingCsv } =
+    useExportPayrollCsv();
 
   const [actionId, setActionId] = useState<string | null>(null);
   const [payslipActionId, setPayslipActionId] = useState<string | null>(null);
+  const [exportingCsvId, setExportingCsvId] = useState<string | null>(null);
   const [payslipConfirmRecord, setPayslipConfirmRecord] =
     useState<TotalMonthlySalary | null>(null);
   const [payslipSuccessRecord, setPayslipSuccessRecord] =
@@ -1186,8 +1190,7 @@ export default function PayrollPage() {
     approvePayroll(record.id, { onSettled: () => setActionId(null) });
   };
   const handleMarkPaid = (record: TotalMonthlySalary) => {
-    setActionId(record.id);
-    markPaid(record.id, { onSettled: () => setActionId(null) });
+    router.push(`/payroll/${record.id}/transfer`);
   };
   const handleRevokeApproval = (record: TotalMonthlySalary) => {
     setActionId(record.id);
@@ -1208,6 +1211,31 @@ export default function PayrollPage() {
         toast.error("Failed to generate payslips. Please try again."),
       onSettled: () => setPayslipActionId(null),
     });
+  };
+
+  const handleExportPayslipsCsv = async (record: TotalMonthlySalary) => {
+    setExportingCsvId(record.id);
+    try {
+      const blob = await exportCsv(record.id);
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      const monthLabel = String(record.month).padStart(2, "0");
+
+      a.href = url;
+      a.download = `payslips-${record.year}-${monthLabel}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+
+      toast.success(
+        `CSV exported for ${getMonthName(record.month)} ${record.year}`,
+      );
+    } catch {
+      toast.error("Failed to export payslip CSV. Please try again.");
+    } finally {
+      setExportingCsvId(null);
+    }
   };
 
   return (
@@ -1639,8 +1667,7 @@ export default function PayrollPage() {
                 ) : (
                   payrollList.map((record) => {
                     const isBusy =
-                      actionId === record.id &&
-                      (approving || markingPaid || revoking);
+                      actionId === record.id && (approving || revoking);
                     return (
                       <tr
                         key={record.id}
@@ -1692,16 +1719,11 @@ export default function PayrollPage() {
                             {(isAdmin || isFinance) &&
                               record.status === PayrollStatus.APPROVED && (
                                 <button
-                                  disabled={isBusy}
                                   onClick={() => handleMarkPaid(record)}
-                                  className="inline-flex items-center gap-1.5 rounded-lg bg-success-light px-2.5 py-1.5 text-xs font-medium text-success transition hover:opacity-80 disabled:opacity-60"
+                                  className="inline-flex items-center gap-1.5 rounded-lg bg-success-light px-2.5 py-1.5 text-xs font-medium text-success transition hover:opacity-80"
                                 >
-                                  {isBusy && markingPaid ? (
-                                    <Loader2 className="h-3.5 w-3.5 animate-spin" />
-                                  ) : (
-                                    <CreditCard className="h-3.5 w-3.5" />
-                                  )}
-                                  Mark Paid
+                                  <CreditCard className="h-3.5 w-3.5" />
+                                  Transfer
                                 </button>
                               )}
                             {isAdmin &&
@@ -1717,6 +1739,27 @@ export default function PayrollPage() {
                                     <RotateCcw className="h-3.5 w-3.5" />
                                   )}
                                   Revoke
+                                </button>
+                              )}
+                            {(isAdmin || isFinance) &&
+                              (record.status === PayrollStatus.APPROVED ||
+                                record.status === PayrollStatus.PAID) && (
+                                <button
+                                  disabled={
+                                    exportingCsv || exportingCsvId === record.id
+                                  }
+                                  onClick={() =>
+                                    handleExportPayslipsCsv(record)
+                                  }
+                                  className="inline-flex items-center gap-1.5 rounded-lg bg-blue-50 px-2.5 py-1.5 text-xs font-medium text-blue-700 transition hover:bg-blue-100 disabled:opacity-60 dark:bg-blue-500/10 dark:text-blue-400"
+                                >
+                                  {exportingCsvId === record.id &&
+                                  exportingCsv ? (
+                                    <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                                  ) : (
+                                    <Download className="h-3.5 w-3.5" />
+                                  )}
+                                  Export CSV
                                 </button>
                               )}
                             {(isAdmin || isFinance) &&

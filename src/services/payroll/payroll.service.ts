@@ -2,9 +2,14 @@ import api from "@/lib/axios";
 import { ApiResponse } from "@/types/api";
 import {
   GeneratePayrollPayload,
+  MarkPaidEmployee,
+  MarkPaidResponse,
   PayrollItem,
   PayrollListParams,
   PayrollPreviewResponse,
+  SingleEmployeePaymentPayload,
+  SingleEmployeePaymentResponse,
+  TransactionEntry,
   TotalMonthlySalary,
 } from "@/types/payroll";
 
@@ -23,31 +28,43 @@ export async function getPayrollPreview(
   const rawItems = raw?.data ?? (Array.isArray(raw) ? raw : []);
   console.log(rawItems);
 
+  type RawPreviewItem = {
+    employeeId: string;
+    name: string;
+    grossSalary: number | string;
+    bonuses: number | string;
+    deductions: number | string;
+    loansEmi: number | string;
+    netSalary: number | string;
+  };
+
   // Map items to ensure proper field names
-  const items = (Array.isArray(rawItems) ? rawItems : []).map((item: any) => ({
-    employeeId: item.employeeId,
-    name: item.name,
-    grossSalary:
-      typeof item.grossSalary === "string"
-        ? parseFloat(item.grossSalary)
-        : item.grossSalary,
-    bonuses:
-      typeof item.bonuses === "string"
-        ? parseFloat(item.bonuses)
-        : item.bonuses,
-    deductions:
-      typeof item.deductions === "string"
-        ? parseFloat(item.deductions)
-        : item.deductions,
-    loansEmi:
-      typeof item.loansEmi === "string"
-        ? parseFloat(item.loansEmi)
-        : item.loansEmi,
-    netSalary:
-      typeof item.netSalary === "string"
-        ? parseFloat(item.netSalary)
-        : item.netSalary,
-  }));
+  const items = (Array.isArray(rawItems) ? rawItems : []).map((item) => {
+    const row = item as RawPreviewItem;
+
+    return {
+      employeeId: row.employeeId,
+      name: row.name,
+      grossSalary:
+        typeof row.grossSalary === "string"
+          ? parseFloat(row.grossSalary)
+          : row.grossSalary,
+      bonuses:
+        typeof row.bonuses === "string" ? parseFloat(row.bonuses) : row.bonuses,
+      deductions:
+        typeof row.deductions === "string"
+          ? parseFloat(row.deductions)
+          : row.deductions,
+      loansEmi:
+        typeof row.loansEmi === "string"
+          ? parseFloat(row.loansEmi)
+          : row.loansEmi,
+      netSalary:
+        typeof row.netSalary === "string"
+          ? parseFloat(row.netSalary)
+          : row.netSalary,
+    };
+  });
 
   return {
     items,
@@ -127,17 +144,79 @@ export async function revokePayrollApproval(
   return (res.data?.data ?? res.data) as TotalMonthlySalary;
 }
 
-// ─── PATCH /api/payroll-processing/{id}/mark-paid ────────────────────────────
-export async function markPayrollPaid(id: string): Promise<TotalMonthlySalary> {
-  const res = await api.patch<ApiResponse<TotalMonthlySalary>>(
-    `/payroll-processing/${id}/mark-paid`,
+// ─── GET /api/payroll-processing/{id}/transfer ────────────────────────────────────
+export async function getPayrollItems(
+  payrollId: string,
+): Promise<MarkPaidEmployee[]> {
+  const res = await api.get(`/payroll-processing/${payrollId}/transfer`);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const raw = (res.data?.data ?? res.data) as any;
+  return Array.isArray(raw) ? raw : (raw?.data ?? raw?.items ?? []);
+}
+
+// ─── PATCH /api/payroll-processing/{id}/transfer ────────────────────────────────
+export async function markPayrollPaid(
+  id: string,
+  transactions?: TransactionEntry[],
+): Promise<MarkPaidResponse> {
+  const res = await api.patch<ApiResponse<MarkPaidResponse> | MarkPaidResponse>(
+    `/payroll-processing/${id}/transfer`,
+    transactions?.length ? { transactions } : {},
   );
-  return (res.data?.data ?? res.data) as TotalMonthlySalary;
+
+  // Support both raw payload and global API envelope shapes.
+  const payload = res.data as ApiResponse<MarkPaidResponse> | MarkPaidResponse;
+  const normalized =
+    payload &&
+    typeof payload === "object" &&
+    "statusCode" in payload &&
+    "data" in payload
+      ? (payload as ApiResponse<MarkPaidResponse>).data
+      : (payload as MarkPaidResponse);
+
+  return normalized;
+}
+
+// ─── PATCH /api/payroll-processing/paid/single-employee/{employeeUUID} ───────────
+export async function markSingleEmployeePaid(
+  employeeUUID: string,
+  payload: SingleEmployeePaymentPayload,
+): Promise<SingleEmployeePaymentResponse> {
+  const res = await api.patch<
+    ApiResponse<SingleEmployeePaymentResponse> | SingleEmployeePaymentResponse
+  >(`/payroll-processing/paid/single-employee/${employeeUUID}`, payload);
+
+  const body = res.data as
+    | ApiResponse<SingleEmployeePaymentResponse>
+    | SingleEmployeePaymentResponse;
+
+  if (
+    body &&
+    typeof body === "object" &&
+    "statusCode" in body &&
+    "data" in body
+  ) {
+    return {
+      success: body.success,
+      message: body.message,
+      data: body.data,
+    };
+  }
+
+  return body;
 }
 
 // ─── POST /api/payslips/generate/{payrollId} ────────────────────────────────
 export async function generatePayslips(payrollId: string): Promise<void> {
   await api.post(`/payslips/generate/${payrollId}`);
+}
+
+// ─── GET /api/payroll-processing/export/csv/{payrollId} ──────────────────────
+export async function exportPayrollCsv(payrollId: string): Promise<Blob> {
+  const res = await api.get(`/payslips/export/csv/${payrollId}`, {
+    responseType: "blob",
+  });
+  return res.data;
 }
 
 // ─── GET /api/payroll-processing/employee/{employeeId}/item ──────────────────

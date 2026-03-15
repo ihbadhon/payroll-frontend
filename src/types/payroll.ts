@@ -77,3 +77,62 @@ export interface PayrollListParams {
   year?: number;
   status?: PayrollStatus;
 }
+
+// ─── Mark-paid per-employee item (with bank details) ──────────────────────────
+export interface MarkPaidBankDetails {
+  id: string;
+  bankName: string;
+  accountNumber: string;
+  accountHolderName: string;
+  accountType: string;
+}
+
+export interface MarkPaidEmployee {
+  employeeUUID?: string;
+  employeeId: string;
+  name: string;
+  grossSalary: number;
+  bonuses: number;
+  deductions: number;
+  loansEmi: number;
+  netSalary: number;
+  status?: PayrollStatus | string;
+  bankDetails: MarkPaidBankDetails | null;
+}
+
+export interface MarkPaidSummary {
+  totalEmployees: number;
+  totalGrossSalary: number;
+  totalBonuses: number;
+  totalDeductions: number;
+  totalLoanRecovery: number;
+  totalNetPayable: number;
+}
+
+export interface MarkPaidResponse {
+  success: boolean;
+  data: MarkPaidEmployee[];
+  message: string;
+  month: number;
+  year: number;
+  summary: MarkPaidSummary;
+}
+
+export interface TransactionEntry {
+  employeeId: string;
+  transactionRef?: string;
+}
+
+export interface SingleEmployeePaymentPayload {
+  payrollId: string;
+  amount: number;
+  description?: string;
+  bankTransactionId?: string;
+  paymentMethod?: string;
+}
+
+export interface SingleEmployeePaymentResponse {
+  success?: boolean;
+  message?: string;
+  data?: unknown;
+}

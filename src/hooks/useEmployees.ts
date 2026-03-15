@@ -4,6 +4,7 @@ import {
   CreateEmployeePayload,
   deactivateEmployee,
   getEmployeeCount,
+  getEmployeeDetails,
   getEmployeesByDepartment,
   searchEmployees,
   updateEmployee,
@@ -126,5 +127,13 @@ export function useDeactivateEmployee() {
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ["employees"] });
     },
+  });
+}
+
+export function useEmployeeDetails(id: string) {
+  return useQuery({
+    queryKey: EMPLOYEE_KEYS.detail(id),
+    queryFn: () => getEmployeeDetails(id),
+    enabled: !!id,
   });
 }

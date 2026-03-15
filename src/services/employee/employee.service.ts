@@ -2,6 +2,7 @@ import api from "@/lib/axios";
 import { ApiResponse } from "@/types/api";
 import {
   Employee,
+  EmployeeDetails,
   EmployeeSearchParams,
   EmployeeSearchResponse,
 } from "@/types/employee";
@@ -43,6 +44,12 @@ export async function getEmployeesByDepartment(
 export async function getEmployeeById(id: string): Promise<Employee> {
   const res = await api.get<ApiResponse<Employee>>(`/employee/${id}`);
   return (res.data?.data ?? res.data) as Employee;
+}
+
+// ─── GET /api/employee/:id/details ────────────────────────────────────────────
+export async function getEmployeeDetails(id: string): Promise<EmployeeDetails> {
+  const res = await api.get(`/employee/${id}/details`);
+  return (res.data?.data ?? res.data) as EmployeeDetails;
 }
 
 // ─── PATCH /api/employee/{id} ─────────────────────────────────────────────────

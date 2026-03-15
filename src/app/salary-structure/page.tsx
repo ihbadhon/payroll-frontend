@@ -22,6 +22,7 @@ import {
   useUpdateSalaryStructure,
   useApproveSalaryStructures,
   useRejectSalaryStructure,
+  useSalaryHistory,
 } from "@/hooks/useSalaryStructure";
 import { Employee } from "@/types/employee";
 import {
@@ -41,6 +42,7 @@ import {
   UserCheck,
   Pencil,
   Clock,
+  History,
 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 
@@ -346,6 +348,83 @@ function RejectModal({
   );
 }
 
+// ─── Salary History Modal ─────────────────────────────────────────────────────
+function SalaryHistoryModal({
+  employeeId,
+  employeeName,
+  onClose,
+}: {
+  employeeId: string;
+  employeeName: string;
+  onClose: () => void;
+}) {
+  const { data: history = [], isLoading } = useSalaryHistory(employeeId);
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      <div className="absolute inset-0 bg-black/50" onClick={onClose} />
+      <div className="relative w-full max-w-md rounded-2xl bg-white dark:bg-dark-2 shadow-xl">
+        {/* Header */}
+        <div className="flex items-center justify-between border-b border-gray-200 px-6 py-4 dark:border-dark-3">
+          <div>
+            <h3 className="text-base font-semibold text-gray-900 dark:text-white">
+              Salary History
+            </h3>
+            <p className="mt-0.5 text-xs text-gray-500 dark:text-gray-400">
+              {employeeName}
+            </p>
+          </div>
+          <button
+            onClick={onClose}
+            className="rounded-lg p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600 dark:hover:bg-dark-3 dark:hover:text-gray-300"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        </div>
+
+        {/* Body */}
+        <div className="max-h-96 overflow-y-auto px-6 py-4">
+          {isLoading ? (
+            <div className="flex items-center justify-center py-10">
+              <Loader2 className="h-6 w-6 animate-spin text-primary" />
+            </div>
+          ) : history.length === 0 ? (
+            <div className="flex flex-col items-center gap-2 py-10 text-center">
+              <History className="h-10 w-10 text-gray-300 dark:text-dark-4" />
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                No salary history found
+              </p>
+            </div>
+          ) : (
+            <ol className="relative border-l border-gray-200 dark:border-dark-3">
+              {history.map((entry, i) => (
+                <li key={i} className="mb-6 ml-4 last:mb-0">
+                  <div className="absolute -left-1.5 mt-1.5 h-3 w-3 rounded-full border-2 border-white bg-primary dark:border-dark-2" />
+                  <p className="text-xs text-gray-500 dark:text-gray-400">
+                    {new Date(entry.effectiveFrom).toLocaleDateString("en-GB", {
+                      day: "2-digit",
+                      month: "short",
+                      year: "numeric",
+                    })}
+                  </p>
+                  <p className="mt-1 text-sm font-semibold text-gray-900 dark:text-white">
+                    {formatCurrency(entry.grossSalary)}
+                  </p>
+                  {i === 0 && (
+                    <span className="mt-1 inline-block rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-700 dark:bg-green-500/10 dark:text-green-400">
+                      Current
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ol>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ─── Skeleton ─────────────────────────────────────────────────────────────────
 function TableSkeleton({ cols }: { cols: number }) {
   return (
@@ -416,6 +495,8 @@ export default function SalaryStructurePage() {
   const [rejectTarget, setRejectTarget] = useState<SalaryStructure | null>(
     null,
   );
+  const [historyTarget, setHistoryTarget] =
+    useState<ActiveSalaryEmployee | null>(null);
   const [approvingId, setApprovingId] = useState<string | null>(null);
 
   const { data: unassigned = [], isLoading: unassignedLoading } =
@@ -588,6 +669,7 @@ export default function SalaryStructurePage() {
                     "Name",
                     "Department",
                     "Gross Salary",
+                    "History",
                     ...(isAdmin ? ["Actions"] : []),
                   ].map((h, i) => (
                     <TableHead
@@ -606,7 +688,7 @@ export default function SalaryStructurePage() {
                   <TableSkeleton cols={isAdmin ? 6 : 5} />
                 ) : structures.length === 0 ? (
                   <TableRow>
-                    <TableCell colSpan={isAdmin ? 6 : 5} className="py-14">
+                    <TableCell colSpan={isAdmin ? 7 : 6} className="py-14">
                       <EmptyState
                         title="No salary structures"
                         description="Assign a salary to an employee to get started."
@@ -650,6 +732,15 @@ export default function SalaryStructurePage() {
                         </TableCell>
                         <TableCell className="text-right font-semibold text-gray-900 dark:text-white">
                           {formatCurrency(salary.grossSalary)}
+                        </TableCell>
+                        <TableCell>
+                          <button
+                            onClick={() => setHistoryTarget(emp)}
+                            className="inline-flex items-center gap-1.5 rounded-lg bg-gray-50 px-3 py-1.5 text-xs font-medium text-gray-600 transition hover:bg-gray-100 dark:bg-dark-3 dark:text-gray-300 dark:hover:bg-dark-3/80"
+                          >
+                            <History className="h-3.5 w-3.5" />
+                            History
+                          </button>
                         </TableCell>
                         {isAdmin && (
                           <TableCell>
@@ -818,6 +909,13 @@ export default function SalaryStructurePage() {
         <RejectModal
           structure={rejectTarget}
           onClose={() => setRejectTarget(null)}
+        />
+      )}
+      {historyTarget && (
+        <SalaryHistoryModal
+          employeeId={historyTarget.id}
+          employeeName={historyTarget.fullName ?? historyTarget.employeeId}
+          onClose={() => setHistoryTarget(null)}
         />
       )}
     </div>

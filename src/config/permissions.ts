@@ -30,6 +30,10 @@ export const ROUTE_PERMISSIONS: { prefix: string; roles: Role[] }[] = [
   },
 
   // Finance + HR + Super Admin
+  {
+    prefix: "/transactions",
+    roles: [ROLES.SUPER_ADMIN, ROLES.HR, ROLES.FINANCE],
+  },
   { prefix: "/payroll", roles: [ROLES.SUPER_ADMIN, ROLES.HR, ROLES.FINANCE] },
   { prefix: "/bonus", roles: [ROLES.SUPER_ADMIN, ROLES.HR, ROLES.FINANCE] },
   { prefix: "/loans", roles: [ROLES.SUPER_ADMIN, ROLES.HR, ROLES.FINANCE] },

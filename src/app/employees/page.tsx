@@ -214,6 +214,7 @@ import {
   Loader2,
 } from "lucide-react";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const LIMIT = 15;
 
@@ -293,6 +294,7 @@ export default function EmployeesPage() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<EmployeeStatus | "">("");
   const [typeFilter, setTypeFilter] = useState<EmployeeType | "">("");
+  const router = useRouter();
   const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(
     null,
   );
@@ -530,7 +532,7 @@ export default function EmployeesPage() {
               page={page}
               limit={LIMIT}
               onPageChange={setPage}
-              onViewDetails={setSelectedEmployee}
+              onViewDetails={(emp) => router.push(`/employees/${emp.id}`)}
             />
           )}
         </div>

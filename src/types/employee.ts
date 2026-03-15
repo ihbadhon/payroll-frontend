@@ -56,3 +56,81 @@ export interface EmployeeSearchResponse {
   page: number;
   limit: number;
 }
+
+// ─── Comprehensive employee details (GET /employee/:id/details) ───────────────
+export interface EmployeeDetailsProfile {
+  id: string;
+  employeeId: string;
+  fullName: string;
+  email: string;
+  phone?: string;
+  designation: string;
+  employeeType: EmployeeType;
+  status: EmployeeStatus;
+  joinDate: string;
+  resignDate: string | null;
+  departmentId: string;
+  userId: string;
+}
+
+export interface EmployeeDetailsUserInfo {
+  id: string;
+  email: string;
+  phone?: string;
+  isActive: boolean;
+  isVerified: boolean;
+  role: { id: string; name: string };
+  lastLogin: string;
+}
+
+export interface EmployeeDetailsDepartment {
+  id: string;
+  name: string;
+  description?: string;
+}
+
+export interface EmployeeDetailsSalaryStructure {
+  id: string;
+  grossSalary: number;
+  totalEarnings: number;
+  totalDeductions: number;
+  netSalary: number;
+  status: string;
+  isActive: boolean;
+  effectiveFrom: string;
+  effectiveTo: string | null;
+  approvedAt: string | null;
+}
+
+export interface EmployeeDetailsBankDetails {
+  id: string;
+  bankName: string;
+  accountNumber: string;
+  accountHolderName: string;
+  accountType: string;
+  routingNumber: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface EmployeeDetailsEmergencyContact {
+  id: string;
+  name: string;
+  relationship: string;
+  phone: string;
+  alternatePhone?: string;
+  email?: string | null;
+  address?: string;
+  notes?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface EmployeeDetails {
+  profile: EmployeeDetailsProfile;
+  userInfo: EmployeeDetailsUserInfo;
+  department: EmployeeDetailsDepartment;
+  currentSalaryStructure: EmployeeDetailsSalaryStructure | null;
+  bankDetails: EmployeeDetailsBankDetails | null;
+  emergencyContacts: EmployeeDetailsEmergencyContact[];
+}

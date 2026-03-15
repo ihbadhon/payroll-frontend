@@ -81,6 +81,21 @@ export async function listPendingSalaryStructures(): Promise<
   return Array.isArray(raw) ? raw : (raw?.data ?? []);
 }
 
+// ─── GET /api/salary-structure/salary-history/:employeeId ──────────────────────
+export interface SalaryHistoryEntry {
+  effectiveFrom: string;
+  grossSalary: number;
+}
+
+export async function getSalaryHistory(
+  employeeId: string,
+): Promise<SalaryHistoryEntry[]> {
+  const res = await api.get(`/salary-structure/salary-history/${employeeId}`);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const raw = (res.data?.data ?? res.data) as any;
+  return Array.isArray(raw) ? raw : (raw?.data ?? []);
+}
+
 // ─── PATCH /api/salary-structure/{id} ────────────────────────────────────────
 export async function updateSalaryStructure(
   id: string,

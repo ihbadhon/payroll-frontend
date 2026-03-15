@@ -2,6 +2,7 @@ import {
   approveSalaryStructures,
   assignSalaryStructure,
   getUnassignedEmployees,
+  getSalaryHistory,
   listSalaryStructures,
   listPendingSalaryStructures,
   rejectSalaryStructure,
@@ -20,7 +21,17 @@ export const SALARY_STRUCTURE_KEYS = {
   list: ["salary-structure", "list"] as const,
   pending: ["salary-structure", "pending"] as const,
   unassigned: ["salary-structure", "unassigned"] as const,
+  history: (employeeId: string) =>
+    ["salary-structure", "history", employeeId] as const,
 };
+
+export function useSalaryHistory(employeeId: string | null) {
+  return useQuery({
+    queryKey: SALARY_STRUCTURE_KEYS.history(employeeId ?? ""),
+    queryFn: () => getSalaryHistory(employeeId!),
+    enabled: !!employeeId,
+  });
+}
 
 export function useUnassignedEmployees() {
   return useQuery({

@@ -14,6 +14,7 @@ import {
   Receipt,
   HandCoins,
   BadgeDollarSign,
+  ArrowRightLeft,
   type LucideIcon,
 } from "lucide-react";
 
@@ -92,6 +93,12 @@ export const NAV_GROUPS: NavGroup[] = [
         label: "Payroll Processing",
         href: "/payroll",
         icon: ClipboardList,
+        roles: ["Super Admin", "HR", "Finance"],
+      },
+      {
+        label: "Transactions",
+        href: "/transactions",
+        icon: ArrowRightLeft,
         roles: ["Super Admin", "HR", "Finance"],
       },
     ],
