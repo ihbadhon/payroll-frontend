@@ -118,13 +118,43 @@ export async function getMyPayslips(): Promise<MyPayslipItem[]> {
   }
 }
 
-// ─── GET /api/user/my/download/{payrollItemId} ──────────────────────────────
-export async function downloadMyPayslip(payrollItemId: string): Promise<Blob> {
+// ─── GET /api/payslips/my/signed-url/{payrollItemId} ────────────────────────
+// Falls back to /api/user/my/download/{payrollItemId} for backward compatibility.
+function extractSignedUrl(payload: unknown): string | null {
+  if (typeof payload === "string") return payload;
+  if (!payload || typeof payload !== "object") return null;
+
+  const obj = payload as Record<string, unknown>;
+  const candidate =
+    obj.url ??
+    obj.signedUrl ??
+    obj.signedURL ??
+    obj.downloadUrl ??
+    obj.downloadURL ??
+    obj.fileUrl ??
+    obj.fileURL ??
+    obj.data;
+
+  return typeof candidate === "string" ? candidate : null;
+}
+
+export async function downloadMyPayslip(
+  payrollItemId: string,
+): Promise<string | Blob> {
   try {
-    const res = await api.get(`/payslips/my/download/${payrollItemId}`, {
-      responseType: "blob",
-    });
-    return res.data as Blob;
+    const res = await api.get<ApiResponse<unknown>>(
+      `/payslips/my/signed-url/${payrollItemId}`,
+    );
+
+    // Handle both wrapped ({ data: "https://..." }) and plain-string responses.
+    const signedUrl =
+      extractSignedUrl(res.data?.data) ?? extractSignedUrl(res.data);
+
+    if (!signedUrl) {
+      throw new Error("Signed payslip URL not found in API response");
+    }
+
+    return signedUrl;
   } catch {
     // Backward-compatible fallback in case backend still exposes the user route
     const res = await api.get(`/user/my/download/${payrollItemId}`, {

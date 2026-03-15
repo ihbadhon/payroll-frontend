@@ -782,17 +782,36 @@ export default function MyPayslipsPage() {
   const handleDownload = (payslip: MyPayslipItem) => {
     setDownloadingId(payslip.id);
     downloadPayslip(payslip.id, {
-      onSuccess: (blob) => {
-        const url = window.URL.createObjectURL(blob);
-        const link = document.createElement("a");
-        const month = getMonthName(payslip.payroll.month).toLowerCase();
-        link.href = url;
-        link.download = `payslip-${month}-${payslip.payroll.year}.pdf`;
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
-        window.URL.revokeObjectURL(url);
-        toast.success("Payslip downloaded");
+      onSuccess: (payload) => {
+        if (typeof payload === "string") {
+          const popup = window.open(payload, "_blank", "noopener,noreferrer");
+          if (!popup) {
+            // Fallback if popup blocker prevents opening a new tab.
+            window.location.assign(payload);
+          }
+          toast.success("Opening payslip");
+          return;
+        }
+
+        const url = window.URL.createObjectURL(payload);
+        const popup = window.open(url, "_blank", "noopener,noreferrer");
+
+        if (!popup) {
+          const link = document.createElement("a");
+          const month = getMonthName(payslip.payroll.month).toLowerCase();
+          link.href = url;
+          link.download = `payslip-${month}-${payslip.payroll.year}.pdf`;
+          document.body.appendChild(link);
+          link.click();
+          link.remove();
+        }
+
+        // Delay revoke so browser has time to load the blob URL.
+        window.setTimeout(() => {
+          window.URL.revokeObjectURL(url);
+        }, 60_000);
+
+        toast.success("Opening payslip");
       },
       onError: () => toast.error("Failed to download payslip"),
       onSettled: () => setDownloadingId(null),

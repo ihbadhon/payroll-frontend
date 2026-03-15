@@ -80,7 +80,11 @@ export async function getMyBankAccount(): Promise<BankDetails | null> {
   const res = await api.get("/user/my-bank-accounts");
   const raw = res.data?.data ?? res.data;
   if (!raw) return null;
-  return Array.isArray(raw) ? (raw[0] ?? null) : raw;
+
+  const account = Array.isArray(raw) ? (raw[0] ?? null) : raw;
+  if (!account?.id) return null;
+
+  return account as BankDetails;
 }
 
 // ─── POST /api/user/add-bank-account ────────────────────────────────────────

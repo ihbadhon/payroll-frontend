@@ -251,7 +251,8 @@ function BankAccountModal({
   bankDetails: BankDetails | null;
   onClose: () => void;
 }) {
-  const isEdit = bankDetails !== null;
+  const accountId = bankDetails?.id ?? null;
+  const isEdit = Boolean(accountId);
   const addMutation = useAddBankAccount();
   const updateMutation = useUpdateBankAccount();
   const isPending = addMutation.isPending || updateMutation.isPending;
@@ -284,9 +285,9 @@ function BankAccountModal({
       accountType: data.accountType,
     };
     try {
-      if (isEdit) {
+      if (accountId) {
         await updateMutation.mutateAsync({
-          accountId: bankDetails.id,
+          accountId,
           payload,
         });
       } else {
@@ -902,7 +903,7 @@ export default function SettingsPage() {
       )}
       {bankModalOpen && (
         <BankAccountModal
-          bankDetails={bankDetails}
+          bankDetails={bankDetails ?? null}
           onClose={() => setBankModalOpen(false)}
         />
       )}
