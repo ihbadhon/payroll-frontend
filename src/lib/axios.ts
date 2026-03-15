@@ -6,8 +6,7 @@ import axios, {
 import Cookies from "js-cookie";
 
 // ─── Constants ───────────────────────────────────────────────────────────────
-const BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3000/api/v1";
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5001/api";
 
 export const ACCESS_TOKEN_KEY = "access_token";
 export const REFRESH_TOKEN_KEY = "refresh_token";
