@@ -2,7 +2,6 @@
 
 import { useAuth } from "@/store/auth.context";
 import { Role } from "@/config/permissions";
-import { getUserRoleName } from "@/utils/auth-role";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import PageLoader from "./PageLoader";
@@ -26,10 +25,10 @@ export default function RoleGuard({ allowedRoles, children }: RoleGuardProps) {
   const { user, isLoading } = useAuth();
   const router = useRouter();
 
-  const userRole = getUserRoleName(user);
+  const userRole = user?.role?.name as Role | undefined;
   const isAllowed =
     allowedRoles.length === 0 ||
-    (!!userRole && allowedRoles.some((role) => role === userRole));
+    (!!userRole && allowedRoles.includes(userRole));
 
   useEffect(() => {
     if (!isLoading && !isAllowed) {

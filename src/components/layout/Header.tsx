@@ -2,7 +2,6 @@
 
 import { useLogout } from "@/hooks/useLogout";
 import { useAuth } from "@/store/auth.context";
-import { getUserRoleName } from "@/utils/auth-role";
 import { cn } from "@/utils/cn";
 import {
   Bell,
@@ -25,9 +24,12 @@ interface HeaderProps {
 export default function Header({ onMenuClick }: HeaderProps) {
   const { user } = useAuth();
   const { handleLogout, isLoggingOut } = useLogout();
-  const { setTheme, resolvedTheme } = useTheme();
+  const { theme, setTheme, resolvedTheme } = useTheme();
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => setMounted(true), []);
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -66,7 +68,7 @@ export default function Header({ onMenuClick }: HeaderProps) {
       {/* ── Right: Actions ─────────────────────────────────────────────── */}
       <div className="ml-auto flex items-center gap-1">
         {/* Theme toggle */}
-        {typeof resolvedTheme !== "undefined" && (
+        {mounted && (
           <button
             onClick={toggleTheme}
             className="rounded-lg p-2 text-dark-5 transition hover:bg-gray-100 hover:text-dark dark:text-dark-6 dark:hover:bg-dark-3 dark:hover:text-white"
@@ -111,7 +113,7 @@ export default function Header({ onMenuClick }: HeaderProps) {
                 {user?.name ?? "User"}
               </p>
               <p className="mt-0.5 text-[11px] leading-none text-dark-5 dark:text-dark-6">
-                {getUserRoleName(user)}
+                {user?.role?.name ?? ""}
               </p>
             </div>
             <ChevronDown

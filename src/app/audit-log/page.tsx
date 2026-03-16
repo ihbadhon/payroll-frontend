@@ -3,6 +3,7 @@
 import { useState } from "react";
 import PageHeader from "@/components/layout/PageHeader";
 import Button from "@/components/ui/Button";
+import Input from "@/components/ui/Input";
 import {
   TableRoot,
   TableHeader,
@@ -34,7 +35,6 @@ import {
 } from "lucide-react";
 import { useAuth } from "@/store/auth.context";
 import { ROLES } from "@/config/permissions";
-import { getUserRoleName } from "@/utils/auth-role";
 import toast from "react-hot-toast";
 
 const MODULES = [
@@ -60,7 +60,7 @@ const ACTIONS = [
 
 export default function AuditLogPage() {
   const { user } = useAuth();
-  const isSuperAdmin = getUserRoleName(user) === ROLES.SUPER_ADMIN;
+  const isSuperAdmin = user?.role?.name === ROLES.SUPER_ADMIN;
 
   const [filters, setFilters] = useState<AuditLogQueryParams>({
     page: 1,
@@ -130,7 +130,7 @@ export default function AuditLogPage() {
       document.body.removeChild(a);
       window.URL.revokeObjectURL(url);
       toast.success("Audit logs exported successfully");
-    } catch {
+    } catch (error) {
       toast.error("Failed to export audit logs");
     }
   };
