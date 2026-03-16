@@ -876,6 +876,7 @@ import { TotalMonthlySalary } from "@/types/payroll";
 import { PayrollStatus } from "@/types/enums";
 import { formatCurrency, getMonthName } from "@/utils/format";
 import { useAuth } from "@/store/auth.context";
+import { getUserRoleName } from "@/utils/auth-role";
 import { ROLES } from "@/config/permissions";
 import {
   Users,
@@ -1118,9 +1119,9 @@ function PayslipConfirmModal({
 export default function PayrollPage() {
   const { user } = useAuth();
   const router = useRouter();
-  const isAdmin =
-    user?.role?.name === ROLES.SUPER_ADMIN || user?.role?.name === ROLES.HR;
-  const isFinance = user?.role?.name === ROLES.FINANCE;
+  const roleName = getUserRoleName(user);
+  const isAdmin = roleName === ROLES.SUPER_ADMIN || roleName === ROLES.HR;
+  const isFinance = roleName === ROLES.FINANCE;
 
   const [month, setMonth] = useState(now.getMonth() + 1);
   const [year, setYear] = useState(now.getFullYear());

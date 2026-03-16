@@ -4,6 +4,7 @@ import { getProfile } from "@/services/auth/auth.service";
 import { AuthUser } from "@/types/auth";
 import { ACCESS_TOKEN_KEY } from "@/lib/axios";
 import { USER_ROLE_KEY } from "@/constants/auth";
+import { getUserRoleName } from "@/utils/auth-role";
 import Cookies from "js-cookie";
 import React, {
   createContext,
@@ -46,8 +47,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   // Set user and persist role cookie for middleware
   const setUser = useCallback((u: AuthUser | null) => {
     setUserState(u);
-    if (u?.role?.name) {
-      Cookies.set(USER_ROLE_KEY, u.role.name, COOKIE_OPTIONS);
+
+    const roleName = getUserRoleName(u);
+    if (roleName) {
+      Cookies.set(USER_ROLE_KEY, roleName, COOKIE_OPTIONS);
     } else {
       Cookies.remove(USER_ROLE_KEY);
     }
@@ -79,9 +82,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       const profile = await getProfile();
       setUserState(profile);
+
       // Keep role cookie in sync with actual profile
-      if (profile?.role?.name) {
-        Cookies.set(USER_ROLE_KEY, profile.role.name, COOKIE_OPTIONS);
+      const roleName = getUserRoleName(profile);
+      if (roleName) {
+        Cookies.set(USER_ROLE_KEY, roleName, COOKIE_OPTIONS);
+      } else {
+        Cookies.remove(USER_ROLE_KEY);
       }
     } catch {
       // Token expired or invalid — clear everything

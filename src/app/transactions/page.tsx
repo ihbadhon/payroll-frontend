@@ -4,6 +4,7 @@ import { useTransactions } from "@/hooks/useTransactions";
 import { TransactionQueryParams, TransactionType } from "@/types/transaction";
 import { formatCurrency, formatDate } from "@/utils/format";
 import { useAuth } from "@/store/auth.context";
+import { getUserRoleName } from "@/utils/auth-role";
 import { ROLES } from "@/config/permissions";
 import {
   ArrowUpRight,
@@ -146,9 +147,9 @@ export default function TransactionsPage() {
   const [startDate, setStartDate] = useState(""); // "YYYY-MM-DD"
   const [endDate, setEndDate] = useState(""); // "YYYY-MM-DD"
 
-  const isAdmin =
-    user?.role?.name === ROLES.SUPER_ADMIN || user?.role?.name === ROLES.HR;
-  const isFinance = user?.role?.name === ROLES.FINANCE;
+  const roleName = getUserRoleName(user);
+  const isAdmin = roleName === ROLES.SUPER_ADMIN || roleName === ROLES.HR;
+  const isFinance = roleName === ROLES.FINANCE;
 
   const params: TransactionQueryParams = {
     page,

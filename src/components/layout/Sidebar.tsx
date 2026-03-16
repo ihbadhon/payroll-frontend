@@ -2,6 +2,7 @@
 
 import { getNavForRole } from "@/config/nav";
 import { useAuth } from "@/store/auth.context";
+import { getUserRoleName } from "@/utils/auth-role";
 import { cn } from "@/utils/cn";
 import { X } from "lucide-react";
 import Link from "next/link";
@@ -15,7 +16,7 @@ interface SidebarProps {
 export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   const pathname = usePathname();
   const { user } = useAuth();
-  const roleName = user?.role?.name ?? "Employee";
+  const roleName = getUserRoleName(user) || "Employee";
   const navGroups = getNavForRole(roleName);
 
   const initials = (user?.name ?? "U")
@@ -176,7 +177,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                 {user?.name ?? "User"}
               </p>
               <p className="truncate text-[11px] text-dark-5 dark:text-dark-6">
-                {user?.role?.name ?? ""}
+                {getUserRoleName(user)}
               </p>
             </div>
           </div>
