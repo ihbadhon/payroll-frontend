@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/Table";
 import { useAuth } from "@/store/auth.context";
 import { ROLES } from "@/config/permissions";
+import { getUserRoleName } from "@/utils/auth-role";
 import {
   useUnassignedEmployees,
   useSalaryStructures,
@@ -482,8 +483,8 @@ function Tab({
 // ─── Page ─────────────────────────────────────────────────────────────────────
 export default function SalaryStructurePage() {
   const { user } = useAuth();
-  const isAdmin =
-    user?.role?.name === ROLES.SUPER_ADMIN || user?.role?.name === ROLES.HR;
+  const roleName = getUserRoleName(user);
+  const isAdmin = roleName === ROLES.SUPER_ADMIN || roleName === ROLES.HR;
 
   const [tab, setTab] = useState<"unassigned" | "structures" | "pending">(
     "unassigned",
