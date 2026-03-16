@@ -893,7 +893,7 @@ export default function SalaryStructurePage() {
         )}
       </div>
 
-      {/* ── Modals ───────────────────────────────────────────────────────── */}
+      {/* ── Modals ─*/}
       {assignTarget && (
         <AssignSalaryModal
           employee={assignTarget}

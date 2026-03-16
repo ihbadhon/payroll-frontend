@@ -441,7 +441,6 @@ export default function AuditLogPage() {
                         </p>
                       </div>
                     </div>
-
                     <div className="flex items-start gap-3">
                       <Calendar className="mt-0.5 h-5 w-5 text-gray-400" />
                       <div className="flex-1">

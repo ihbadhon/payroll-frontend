@@ -1797,7 +1797,7 @@ export default function PayrollPage() {
         </div>
       )}
 
-      {/* ── Payslip Confirm Modal ─────────────────────────────────────── */}
+      {/* ── Payslip Confirm Modal  */}
       {payslipConfirmRecord && (
         <PayslipConfirmModal
           record={payslipConfirmRecord}

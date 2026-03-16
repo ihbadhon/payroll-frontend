@@ -11,7 +11,6 @@ const ADMIN_ROLES: string[] = [ROLES.SUPER_ADMIN, ROLES.HR, ROLES.FINANCE];
 
 export default function DashboardPage() {
   const { user, isLoading } = useAuth();
-
   if (isLoading) return <PageLoader />;
 
   const role = getUserRoleName(user);
