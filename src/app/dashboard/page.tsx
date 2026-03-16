@@ -5,6 +5,7 @@ import { ROLES } from "@/config/permissions";
 import AdminDashboard from "@/components/dashboard/AdminDashboard";
 import EmployeeDashboard from "@/components/dashboard/EmployeeDashboard";
 import PageLoader from "@/components/shared/PageLoader";
+import { getUserRoleName } from "@/utils/auth-role";
 
 const ADMIN_ROLES: string[] = [ROLES.SUPER_ADMIN, ROLES.HR, ROLES.FINANCE];
 
@@ -13,7 +14,7 @@ export default function DashboardPage() {
 
   if (isLoading) return <PageLoader />;
 
-  const role = user?.role?.name ?? "";
+  const role = getUserRoleName(user);
 
   if (ADMIN_ROLES.includes(role)) {
     return <AdminDashboard />;

@@ -255,6 +255,7 @@ import { useEmployeeCount, EMPLOYEE_KEYS } from "@/hooks/useEmployees";
 import { usePayrolls, PAYROLL_KEYS } from "@/hooks/usePayroll";
 import { useLoanStatusCount, LOAN_KEYS } from "@/hooks/useLoans";
 import { PayrollStatus } from "@/types/enums";
+import { getUserRoleName } from "@/utils/auth-role";
 import { formatCurrency } from "@/utils/format";
 import {
   Users,
@@ -407,6 +408,7 @@ export default function AdminDashboard() {
   };
 
   const firstName = user?.name?.split(" ")[0] ?? "there";
+  const roleName = getUserRoleName(user);
   const initials = (user?.name ?? "A")
     .split(" ")
     .map((w) => w[0])
@@ -433,7 +435,7 @@ export default function AdminDashboard() {
               </p>
               <h1 className="text-xl font-bold text-white">{firstName}!</h1>
               <p className="mt-0.5 text-xs text-white/60">
-                {user?.role?.name} · Payroll system overview
+                {roleName} · Payroll system overview
               </p>
             </div>
           </div>
