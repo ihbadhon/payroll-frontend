@@ -621,7 +621,7 @@ export default function TransactionsPage() {
           </table>
         </div>
 
-        {/* ── Pagination ──────────────────────────────────────────── */}
+        {/* ── Pagination */}
         {meta.totalPages > 1 && (
           <div className="flex items-center justify-between border-t border-stroke px-6 py-4 dark:border-dark-3">
             <p className="text-xs text-dark-4 dark:text-dark-6">
