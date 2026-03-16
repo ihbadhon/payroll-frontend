@@ -12,7 +12,7 @@ export default function DashboardPage() {
   const { user, isLoading } = useAuth();
   if (isLoading) return <PageLoader />;
 
-  const role = user?.role?.name ?? "";
+  const role = user?.role "";
 
   if (ADMIN_ROLES.includes(role)) {
     return <AdminDashboard />;
